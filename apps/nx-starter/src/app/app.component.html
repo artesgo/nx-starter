@@ -1,7 +1,12 @@
-<nav>
-  <a [routerLink]="''" routerLinkActive="active">Home</a>
-  <a [routerLink]="'calendar'" routerLinkActive="active">Calendar</a>
-</nav>
+<div id="app" data-theme="cupcake">
+  <nav>
+    <a class="link link-primary underline" [routerLink]="''" routerLinkActive="active">Home</a>
+    <a class="link link-primary underline" [routerLink]="'calendar'" routerLinkActive="active">Calendar</a>
 
-<lib-daisy></lib-daisy>
-<router-outlet></router-outlet>
+    <daisy-theme [(theme)]="theme"></daisy-theme>
+  </nav>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

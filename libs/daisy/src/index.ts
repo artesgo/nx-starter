@@ -1,1 +1,1 @@
-export * from './lib/daisy/daisy.component';
+export * from './lib/theme/theme.component';

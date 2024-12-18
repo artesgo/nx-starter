@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DaisyComponent } from 'ng-daisy';
+import { ThemeComponent } from 'ng-daisy';
 
 @Component({
-  imports: [RouterModule, DaisyComponent],
+  imports: [RouterModule, ThemeComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'nx-starter';
+
+  theme = signal('cupcake');
 }
