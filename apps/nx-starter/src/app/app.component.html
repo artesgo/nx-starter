@@ -1,7 +1,7 @@
 <div id="app" data-theme="cupcake">
   <nav>
-    <a class="link link-primary underline" [routerLink]="''" routerLinkActive="active">Home</a>
-    <a class="link link-primary underline" [routerLink]="'calendar'" routerLinkActive="active">Calendar</a>
+    <p-button label="Home" [link]="true" [routerLink]="''" />
+    <p-button label="Calendar" [link]="true" [routerLink]="'calendar'" />
 
     <daisy-theme [(theme)]="theme"></daisy-theme>
   </nav>

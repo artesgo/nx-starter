@@ -1,1 +1,39 @@
-<p>calendar works!</p>
+<p-floatlabel [variant]="'on'">
+  <input id="task" pInputText [(ngModel)]="task" />
+  <label for="task">Task</label>
+</p-floatlabel>
+
+<p-floatlabel [variant]="'on'">
+  <p-datepicker id="start" [(ngModel)]="start" />
+  <label for="start">Start</label>
+</p-floatlabel>
+
+<p-floatlabel [variant]="'on'">
+  <p-datepicker id="end" [(ngModel)]="end" />
+  <label for="end">end</label>
+</p-floatlabel>
+
+<p-button label="Submit" (click)="submit()" [id]="'calendar-submit'"></p-button>
+
+<p-virtualscroller [items]="tasks()" [itemSize]="10" scrollHeight="300px" 
+  styleClass="border border-surface"
+  [style]="{ width: '200px', height: '200px' }"
+>
+  <ng-template pTemplate="task" let-task let-options="options">
+    <div class="flex flex-col justify-between p-2" [ngClass]="{ 'bg-slate-800': options.odd }"
+      style="height: 90px;">
+      <div class="flex justify-between">
+        {{ task.title }}
+        <p-checkbox [(ngModel)]="task.done" [binary]="true"></p-checkbox>
+      </div>
+      <div class="flex justify-between">
+        <div>Start</div>
+        <div>{{ task.start | date : 'MMM d, yyyy' }}</div>
+      </div>
+      <div class="flex justify-between">
+        <div>End</div>
+        <div>{{ task.due | date : 'MMM d, yyyy' }}</div>
+      </div>
+    </div>
+  </ng-template>
+</p-virtualscroller>
