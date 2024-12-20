@@ -14,14 +14,29 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome nx-starter'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome nx-starter');
   });
 
   it(`should have as title 'nx-starter'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
+    expect(app.title).toEqual('nx-starter');
     expect(app.title).toEqual('nx-starter');
   });
 });

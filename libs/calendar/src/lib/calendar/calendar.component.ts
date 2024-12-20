@@ -26,9 +26,6 @@ export class CalendarComponent {
   submit() {
     const start = this.start();
     const end = this.end();
-    this.tasks.set([
-      ...this.tasks(),
-      { title: this.task(), created: new Date(), start, due: end, done: false },
-    ]);
+    this.tasks.set([...this.tasks(), { title: this.task(), created: new Date(), start, due: end, done: false }]);
   }
 }
