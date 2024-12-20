@@ -27,8 +27,16 @@ module.exports = [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    // Override or add rules here
-    rules: {},
+    ignores: ['**/*.spec.ts'],
+    rules: {
+      complexity: ['warn', 16],
+      'max-params': ['warn', 4],
+      'max-statements': ['warn', 16],
+      'max-statements-per-line': ['warn', { max: 1 }],
+      'max-nested-callbacks': ['warn', 2],
+      'max-depth': ['warn', 4],
+      'max-lines': ['warn', 1000],
+    },
   },
   {
     files: ['**/*.json'],
