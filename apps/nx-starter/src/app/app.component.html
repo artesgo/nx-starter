@@ -2,21 +2,7 @@
   id="app"
   data-theme="cupcake"
 >
-  <nav>
-    <p-button
-      label="Home"
-      [link]="true"
-      [routerLink]="''"
-    />
-    <p-button
-      label="Calendar"
-      [link]="true"
-      [routerLink]="'calendar'"
-    />
-
-    <daisy-theme [(theme)]="theme"></daisy-theme>
-  </nav>
-
+  <app-nav></app-nav>
   <main>
     <router-outlet></router-outlet>
   </main>
