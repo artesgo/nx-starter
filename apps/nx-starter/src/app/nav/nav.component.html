@@ -1,14 +1,31 @@
-<nav>
-  <p-button
-    label="Home"
-    [link]="true"
-    [routerLink]="''"
-  />
-  <p-button
-    label="Calendar"
-    [link]="true"
-    [routerLink]="'calendar'"
-  />
+<nav class="pt-2 flex justify-between">
+  <div>
+    <p-button
+      label="Home"
+      [link]="true"
+      [routerLink]="''"
+    />
+    <p-button
+      label="Calendar"
+      [link]="true"
+      [routerLink]="'calendar'"
+    />
 
-  <daisy-theme [(theme)]="theme"></daisy-theme>
+    <daisy-theme [(theme)]="theme"></daisy-theme>
+  </div>
+
+  <div>
+    @if (loggedIn()) {
+      artesgo
+      <p-button
+        label="Logout"
+        (click)="logout()"
+      />
+    } @else if (!loggedIn()) {
+      <p-button
+        label="Login"
+        (click)="login()"
+      />
+    }
+  </div>
 </nav>
