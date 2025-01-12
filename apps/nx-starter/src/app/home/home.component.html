@@ -1,1 +1,25 @@
-<p>home works!</p>
+<ul>
+  @for (
+    menuItem of menu;
+    track menuItem.value;
+    let i = $index, last = $last, first = $first, even = $even, odd = $odd
+  ) {
+    <li [class.even]="even">
+      <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
+    </li>
+  } @empty {
+    <li>No menu items</li>
+  }
+</ul>
+
+<ul>
+  <ng-container *ngIf="menu.length > 0; else noMenuItems">
+    <li *ngFor="let menuItem of menu">
+      <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
+    </li>
+  </ng-container>
+
+  <ng-template #noMenuItems>
+    <li>No menu items</li>
+  </ng-template>
+</ul>
