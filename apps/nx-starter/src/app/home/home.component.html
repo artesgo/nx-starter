@@ -13,13 +13,13 @@
 </ul>
 
 <ul>
-  <ng-container *ngIf="menu.length > 0; else noMenuItems">
-    <li *ngFor="let menuItem of menu">
-      <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
-    </li>
-  </ng-container>
-
-  <ng-template #noMenuItems>
+  @if (menu.length > 0) {
+    @for (menuItem of menu; track menuItem) {
+      <li>
+        <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
+      </li>
+    }
+  } @else {
     <li>No menu items</li>
-  </ng-template>
+  }
 </ul>

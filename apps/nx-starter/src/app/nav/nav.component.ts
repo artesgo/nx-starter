@@ -3,6 +3,7 @@ import { ThemeComponent } from 'ng-daisy';
 import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-nav',
   imports: [Button, ThemeComponent, RouterLink],
@@ -11,13 +12,21 @@ import { RouterLink } from '@angular/router';
 })
 export class NavComponent {
   theme = signal('cupcake');
-  loggedIn = signal(false);
+  authState = signal('unauthenticated');
 
   login() {
-    this.loggedIn.set(true);
+    this.authState.set('authenticated');
   }
 
   logout() {
-    this.loggedIn.set(false);
+    this.authState.set('unauthenticated');
+  }
+
+  auth() {
+    this.authState.set('authorized');
+  }
+
+  goToDashboard() {
+    console.log('go to dashboard');
   }
 }

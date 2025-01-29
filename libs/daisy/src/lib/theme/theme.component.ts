@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, effect, input, model, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'daisy-theme',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

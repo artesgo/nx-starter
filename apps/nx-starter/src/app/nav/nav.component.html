@@ -15,17 +15,63 @@
   </div>
 
   <div>
-    @if (loggedIn()) {
-      artesgo
-      <p-button
-        label="Logout"
-        (click)="logout()"
-      />
-    } @else if (!loggedIn()) {
-      <p-button
-        label="Login"
-        (click)="login()"
-      />
+    @switch (authState()) {
+      @case ('authenticated') {
+        artesgo
+        <p-button
+          label="Logout"
+          (click)="logout()"
+        />
+      }
+      @case ('unauthenticated') {
+        <p-button
+          label="Login"
+          (click)="login()"
+        />
+      }
+      @case ('authorized') {
+        artesgo
+        <p-button
+          label="Logout"
+          (click)="logout()"
+        />
+        <p-button
+          label="Dashboard"
+          (click)="goToDashboard()"
+        />
+      }
     }
   </div>
 </nav>
+
+@switch (authState()) {
+  @case ('authenticated') {
+    artesgo
+    <p-button
+      label="Logout"
+      (click)="logout()"
+    />
+  }
+  @case ('authorized') {
+    artesgo
+    <p-button
+      label="Logout"
+      (click)="logout()"
+    />
+    <p-button
+      label="Dashboard"
+      (click)="goToDashboard()"
+    />
+  }
+  @default {
+    <p-button
+      label="Login"
+      (click)="login()"
+    />
+  }
+}
+
+<p-button
+  label="Login"
+  (click)="auth()"
+/>
