@@ -1,0 +1,29 @@
+<div class="flex items-center gap-2" [ngClass]="class()" [class.flex-row-reverse]="reverse()">
+  <input
+    type="checkbox"
+    class="checkbox"
+    [name]="name()"
+    [id]="id()"
+    [attr.data-testid]="id()"
+    [class.checkbox-xs]="size() === 'xs'"
+    [class.checkbox-sm]="size() === 'sm'"
+    [class.checkbox-md]="size() === 'md'"
+    [class.checkbox-lg]="size() === 'lg'"
+    [class.checkbox-accent]="style() === 'accent'"
+    [class.checkbox-ghost]="style() === 'ghost'"
+    [class.checkbox-info]="style() === 'info'"
+    [class.checkbox-neutral]="style() === 'neutral'"
+    [class.checkbox-primary]="style() === 'primary'"
+    [class.checkbox-secondary]="style() === 'secondary'"
+    [(checked)]="checked"
+  />
+  <label
+    [for]="id()"
+    [class.text-xs]="size() === 'xs'"
+    [class.text-sm]="size() === 'sm'"
+    [class.text-md]="size() === 'md'"
+    [class.text-lg]="size() === 'lg'"
+  >
+    <ng-content></ng-content>
+  </label>
+</div>

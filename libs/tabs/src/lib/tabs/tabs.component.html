@@ -1,0 +1,32 @@
+<div
+  role="tablist"
+  [class.tabs-bordered]="type() === 'bordered'"
+  [class.tabs-lifted]="type() === 'lifted'"
+  [class.tabs-boxed]="type() === 'boxed'"
+  [class.tabs-sm]="size() === 'sm'"
+  [class.tabs-md]="size() === 'md'"
+  [class.tabs-lg]="size() === 'lg'"
+  [class.tabs-xs]="size() === 'xs'"
+  class="tabs w-full"
+>
+  @for (item of tabs(); track $index) {
+    <button
+      role="tab"
+      class="tab whitespace-nowrap"
+      [class.bg-accent]="style() === 'accent'"
+      [class.bg-ghost]="style() === 'ghost'"
+      [class.bg-info]="style() === 'info'"
+      [class.bg-neutral]="style() === 'neutral'"
+      [class.bg-primary]="style() === 'primary'"
+      [class.bg-secondary]="style() === 'secondary'"
+      [class.tab-active]="selected() === item.name"
+      [class.text-neutral-content]="selected() !== item.name"
+      (click)="selected.set(item.name)"
+    >
+      {{ item.name }}
+    </button>
+    @if (item.tab) {
+      <ng-container *ngTemplateOutlet="item.tab"></ng-container>
+    }
+  }
+</div>

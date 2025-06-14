@@ -1,0 +1,19 @@
+<div
+  class="modal"
+  [class.modal-open]="open()"
+  [class.modal-top]="position() === 'top'"
+  [class.modal-middle]="position() === 'middle'"
+  [class.modal-bottom]="position() === 'bottom'"
+  [ngClass]="class()"
+>
+  <div
+    class="modal-backdrop"
+    tabindex="-1"
+    (click)="open.set(false)"
+    (keypress)="$event.key === 'Escape' && open.set(false)"
+  ></div>
+  <div class="modal-box mx-auto" [ngClass]="width()">
+    <button class="btn btn-sm btn-circle absolute right-2 top-2" (click)="open.set(false)">✕</button>
+    <ng-content></ng-content>
+  </div>
+</div>

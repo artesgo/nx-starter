@@ -16,7 +16,25 @@
     "baseUrl": ".",
     "paths": {
       "@nx-starter/calendar": ["libs/calendar/src/index.ts"],
-      "ng-daisy": ["libs/daisy/src/index.ts"]
+      "ng-daisy": ["libs/daisy/src/index.ts"],
+      "ng-daisy-accordion": ["libs/accordion/src/index.ts"],
+      "ng-daisy-avatar": ["libs/avatar/src/index.ts"],
+      "ng-daisy-button": ["libs/button/src/index.ts"],
+      "ng-daisy-checkbox": ["libs/checkbox/src/index.ts"],
+      "ng-daisy-directives": ["libs/directives/src/index.ts"],
+      "ng-daisy-divider": ["libs/divider/src/index.ts"],
+      "ng-daisy-drawer": ["libs/drawer/src/index.ts"],
+      "ng-daisy-dropdown": ["libs/dropdown/src/index.ts"],
+      "ng-daisy-indicator": ["libs/indicator/src/index.ts"],
+      "ng-daisy-input": ["libs/input/src/index.ts"],
+      "ng-daisy-link": ["libs/link/src/index.ts"],
+      "ng-daisy-modal": ["libs/modal/src/index.ts"],
+      "ng-daisy-overlay": ["libs/overlay/src/index.ts"],
+      "ng-daisy-radio": ["libs/radio/src/index.ts"],
+      "ng-daisy-tabs": ["libs/tabs/src/index.ts"],
+      "ng-daisy-theme": ["libs/theme/src/index.ts"],
+      "ng-daisy-toast": ["libs/toast/src/index.ts"],
+      "ng-daisy-typeahead": ["libs/typeahead/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,7 @@
+<input type="radio" [id]="id()" [attr.data-testid]="id()" [name]="name()" />
+<div class="collapse-title" [atgStyle]="style()">
+  <ng-content select="[title]"></ng-content>
+</div>
+<div class="collapse-content" [atgStyle]="style()">
+  <ng-content></ng-content>
+</div>

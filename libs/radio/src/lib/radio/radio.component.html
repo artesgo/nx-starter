@@ -1,0 +1,27 @@
+<label
+  class="flex items-center"
+  [class.text-xs]="size() === 'xs'"
+  [class.text-sm]="size() === 'sm'"
+  [class.text-md]="size() === 'md'"
+  [class.text-lg]="size() === 'lg'"
+  [for]="id()"
+>
+  <input
+    [id]="id()"
+    type="radio"
+    [name]="name()"
+    class="radio mr-2"
+    [class.radio-xs]="size() === 'xs'"
+    [class.radio-sm]="size() === 'sm'"
+    [class.radio-md]="size() === 'md'"
+    [class.radio-lg]="size() === 'lg'"
+    [class.radio-accent]="style() === 'accent'"
+    [class.radio-ghost]="style() === 'ghost'"
+    [class.radio-info]="style() === 'info'"
+    [class.radio-neutral]="style() === 'neutral'"
+    [class.radio-primary]="style() === 'primary'"
+    [class.radio-secondary]="style() === 'secondary'"
+    [value]="value()"
+  />
+  <ng-content></ng-content>
+</label>

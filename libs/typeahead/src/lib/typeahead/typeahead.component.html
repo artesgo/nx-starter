@@ -1,0 +1,16 @@
+<input
+  type="text"
+  class="input"
+  [(ngModel)]="value"
+  [class.input-xs]="size() === 'xs'"
+  [class.input-sm]="size() === 'sm'"
+  [class.input-md]="size() === 'md'"
+  [class.input-lg]="size() === 'lg'"
+  [class.input-primary]="style() === 'primary'"
+  [class.input-secondary]="style() === 'secondary'"
+  [class.input-accent]="style() === 'accent'"
+  [class.input-ghost]="style() === 'ghost'"
+  [class.input-neutral]="style() === 'neutral'"
+  [class.input-info]="style() === 'info'"
+/>
+@if (open()) {}

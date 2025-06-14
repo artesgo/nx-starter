@@ -1,0 +1,11 @@
+<div
+  class="toast"
+  [atgStyle]="style()"
+  [class.toast-start]="horizontal() === 'left'"
+  [class.toast-center]="horizontal() === 'center'"
+  [class.toast-end]="horizontal() === 'right'"
+  [class.toast-top]="vertical() === 'top'"
+  [class.toast-middle]="vertical() === 'center'"
+>
+  <ng-content></ng-content>
+</div>

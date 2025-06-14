@@ -1,0 +1,22 @@
+<div class="indicator" [ngClass]="class()">
+  <div
+    class="indicator-item badge"
+    [class.badge-primary]="style() === 'primary'"
+    [class.badge-secondary]="style() === 'secondary'"
+    [class.badge-accent]="style() === 'accent'"
+    [class.badge-neutral]="style() === 'neutral'"
+    [class.badge-success]="style() === 'success'"
+    [class.badge-warning]="style() === 'warning'"
+    [class.badge-error]="style() === 'error'"
+    [class.badge-info]="style() === 'info'"
+    [class.indicator-start]="horizontal() === 'left'"
+    [class.indicator-center]="horizontal() === 'center'"
+    [class.indicator-end]="horizontal() === 'right'"
+    [class.indicator-top]="vertical() === 'top'"
+    [class.indicator-middle]="vertical() === 'center'"
+    [class.indicator-bottom]="vertical() === 'bottom'"
+  >
+    <ng-content select="[badge]"></ng-content>
+  </div>
+  <ng-content></ng-content>
+</div>

@@ -1,0 +1,17 @@
+<div
+  class="divider"
+  [class.divider-start]="position() === 'start'"
+  [class.divider-end]="position() === 'end'"
+  [class.divider-horizontal]="vertical()"
+  [class.h-full]="vertical()"
+  [class.divider-primary]="style() === 'primary'"
+  [class.divider-secondary]="style() === 'secondary'"
+  [class.divider-accent]="style() === 'accent'"
+  [class.divider-neutral]="style() === 'neutral'"
+  [class.divider-success]="style() === 'success'"
+  [class.divider-warning]="style() === 'warning'"
+  [class.divider-error]="style() === 'error'"
+  [class.divider-info]="style() === 'info'"
+>
+  <ng-content></ng-content>
+</div>

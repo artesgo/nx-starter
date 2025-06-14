@@ -1,0 +1,46 @@
+<div class="dropdown" [class.dropdown-open]="open()" [class.dropdown-end]="align() === 'end'">
+  <atg-overlay (close)="open.set(false); debugMe('overlay')"></atg-overlay>
+  <button
+    type="button"
+    role="listbox"
+    [class.btn-xs]="size() === 'xs'"
+    [class.btn-sm]="size() === 'sm'"
+    [class.btn-md]="size() === 'md'"
+    [class.btn-lg]="size() === 'lg'"
+    (click)="open.set(true)"
+    (keydown.esc)="anchor.focus(); open.set(false); debugMe('esc')"
+    (keydown)="focusFirst($event)"
+    class="btn btn-{{ style() }} border-{{
+      style()
+    }} border-solid m-1 btn-outline whitespace-nowrap text-neutral-content"
+  >
+    <ng-content></ng-content>
+  </button>
+  <ul
+    [class.glass]="glass()"
+    [atgStyle]="style()"
+    class="menu z-20 rounded-md border-s dropdown-content flex flex-row bg-{{ style() }}-content text-{{
+      style()
+    }}-content max-h-56 overflow-scroll"
+    tabindex="-1"
+    (keydown.esc)="anchor.focus(); open.set(false); debugMe('esc list')"
+  >
+    @for (item of values(); track $index) {
+      <li class="w-full">
+        <button
+          #option
+          class="m-1 w-full flex items-center whitespace-nowrap"
+          [class.btn-xs]="size() === 'xs'"
+          [class.btn-sm]="size() === 'sm'"
+          [class.btn-md]="size() === 'md'"
+          [class.btn-lg]="size() === 'lg'"
+          (keydown)="keydown($event, $index)"
+          (click)="select.emit(item); anchor.focus(); open.set(false); debugMe('click')"
+        >
+          {{ labels()[$index] }}
+        </button>
+      </li>
+    }
+  </ul>
+</div>
+<a tabindex="-1" #anchor class="sr-only"> Dropdown Closed </a>

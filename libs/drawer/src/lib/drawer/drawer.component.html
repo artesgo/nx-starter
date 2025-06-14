@@ -1,0 +1,13 @@
+<div class="drawer" [class.drawer-end]="position() === 'right'">
+  <input [id]="id()" tabindex="-1" type="checkbox" class="drawer-toggle" [(ngModel)]="open" />
+  <div class="drawer-side z-10">
+    <button aria-label="close sidebar" class="drawer-overlay" tabindex="-1" (click)="open.set(false)"></button>
+    <div
+      class="drawer-content bg-base-200 text-base-content min-h-full w-80 p-4"
+      tabindex="-1"
+      (keydown.esc)="open.set(false)"
+    >
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

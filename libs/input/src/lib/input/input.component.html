@@ -1,0 +1,22 @@
+<label class="block" [for]="id()">
+  <ng-content></ng-content>
+</label>
+<input
+  [id]="id()"
+  [attr.data-testid]="id()"
+  class="input"
+  [class.input-xs]="size() === 'xs'"
+  [class.input-sm]="size() === 'sm'"
+  [class.input-md]="size() === 'md'"
+  [class.input-lg]="size() === 'lg'"
+  [class.input-accent]="style() === 'accent'"
+  [class.input-ghost]="style() === 'ghost'"
+  [class.input-info]="style() === 'info'"
+  [class.input-neutral]="style() === 'neutral'"
+  [class.input-primary]="style() === 'primary'"
+  [class.input-secondary]="style() === 'secondary'"
+  type="text"
+  [name]="name()"
+  [(value)]="value"
+  (keyup)="updateValue($event)"
+/>
