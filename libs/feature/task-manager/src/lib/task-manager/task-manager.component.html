@@ -1,0 +1,9 @@
+<h1 class="flex justify-center font-semibold text-xl my-6">Task Manager</h1>
+
+<div class="flex gap-2 items-end">
+  <atg-input [id]="'task'" [formControl]="name" [size]="'xs'">Task Name</atg-input>
+  <atg-input [id]="'description'" [formControl]="description" [size]="'xs'"> Task Description </atg-input>
+  <button atgButton="primary" [size]="'xs'" (click)="addTask()">Add Task</button>
+</div>
+
+<atg-task *ngFor="let task of tasks()" [task]="task"></atg-task>

@@ -1,0 +1,9 @@
+{
+  "/api/v1": {
+    "target": "http://localhost:3000",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "secure": false
+  }
+}
