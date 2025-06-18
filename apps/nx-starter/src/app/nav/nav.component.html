@@ -3,12 +3,20 @@
     <p-button
       label="Home"
       [link]="true"
+      [size]="'small'"
       [routerLink]="''"
     />
     <p-button
       label="Calendar"
       [link]="true"
+      [size]="'small'"
       [routerLink]="'calendar'"
+    />
+    <p-button
+      label="Budget"
+      [link]="true"
+      [size]="'small'"
+      [routerLink]="'budget'"
     />
 
     <daisy-theme [(theme)]="theme"></daisy-theme>
@@ -43,35 +51,3 @@
     }
   </div>
 </nav>
-
-@switch (authState()) {
-  @case ('authenticated') {
-    artesgo
-    <p-button
-      label="Logout"
-      (click)="logout()"
-    />
-  }
-  @case ('authorized') {
-    artesgo
-    <p-button
-      label="Logout"
-      (click)="logout()"
-    />
-    <p-button
-      label="Dashboard"
-      (click)="goToDashboard()"
-    />
-  }
-  @default {
-    <p-button
-      label="Login"
-      (click)="login()"
-    />
-  }
-}
-
-<p-button
-  label="Login"
-  (click)="auth()"
-/>

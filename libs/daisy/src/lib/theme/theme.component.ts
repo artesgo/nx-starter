@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, effect, input, model, OnInit } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
 
 @Component({

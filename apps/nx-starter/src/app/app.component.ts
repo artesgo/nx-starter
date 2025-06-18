@@ -3,10 +3,9 @@ import { RouterModule } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { HttpClient } from '@angular/common/http';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { JsonPipe } from '@angular/common';
 
 @Component({
-  imports: [RouterModule, NavComponent, JsonPipe],
+  imports: [RouterModule, NavComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

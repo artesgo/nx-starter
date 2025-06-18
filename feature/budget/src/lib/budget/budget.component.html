@@ -1,0 +1,60 @@
+<p-floatlabel [variant]="'on'">
+  <input
+    id="budget"
+    pInputText
+    [(ngModel)]="description"
+  />
+  <label for="budget">Budget Item</label>
+</p-floatlabel>
+<p-floatlabel [variant]="'on'">
+  <input
+    id="budget"
+    pInputText
+    [(ngModel)]="amount"
+  />
+  <label for="budget">Amount</label>
+</p-floatlabel>
+<p-floatlabel [variant]="'on'">
+  <p-datepicker
+    id="date"
+    [(ngModel)]="date"
+  />
+  <label for="date">Date</label>
+</p-floatlabel>
+
+<p-floatlabel>
+  <label for="recurring">Recurring</label>
+  <p-checkbox
+    id="recurring"
+    [(ngModel)]="recurring"
+    [binary]="true"
+  ></p-checkbox>
+</p-floatlabel>
+<p-button
+  label="Budget"
+  [size]="'small'"
+  (onClick)="addItem()"
+></p-button>
+
+<!-- bar chart with month view -->
+<div class="chart">
+  @for (item of processedItems(); track $index) {
+    <div>
+      item: {{ item.description }} {{ item.amount }} {{ item.total }} <button (click)="removeItem(item.id)">X</button>
+    </div>
+  }
+</div>
+
+<!-- grouped bar chart with month view -->
+<div class="barchart">
+  @for (group of groupedItems(); track $index) {
+    <div class="flex flex-col">
+      @for (item of group; track item.total) {
+        <div
+          title="{{ item.description }}"
+          [style]="barStyle(item.amount)"
+        ></div>
+      }
+    </div>
+  }
+</div>

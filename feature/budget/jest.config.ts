@@ -1,8 +1,8 @@
 export default {
-  displayName: 'task-manager',
-  preset: '../../../jest.preset.js',
+  displayName: 'budget',
+  preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../coverage/libs/feature/task-manager',
+  coverageDirectory: '../../coverage/feature/budget',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

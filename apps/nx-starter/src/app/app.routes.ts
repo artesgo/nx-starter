@@ -10,4 +10,8 @@ export const appRoutes: Route[] = [
     path: 'calendar',
     loadChildren: () => import('@nx-starter/calendar').then((m) => m.calendarRoutes),
   },
+  {
+    path: 'budget',
+    loadChildren: () => import('@nx-starter/budget').then((m) => m.routes),
+  },
 ];
