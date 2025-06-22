@@ -1,23 +1,8 @@
 <nav class="pt-2 flex justify-between">
   <div>
-    <p-button
-      label="Home"
-      [link]="true"
-      [size]="'small'"
-      [routerLink]="''"
-    />
-    <p-button
-      label="Calendar"
-      [link]="true"
-      [size]="'small'"
-      [routerLink]="'calendar'"
-    />
-    <p-button
-      label="Budget"
-      [link]="true"
-      [size]="'small'"
-      [routerLink]="'budget'"
-    />
+    <button [routerLink]="''">Home</button>
+    <button [routerLink]="'calendar'">Calendar</button>
+    <button [routerLink]="'budget'">Budget</button>
 
     <daisy-theme [(theme)]="theme"></daisy-theme>
   </div>
@@ -26,27 +11,15 @@
     @switch (authState()) {
       @case ('authenticated') {
         artesgo
-        <p-button
-          label="Logout"
-          (click)="logout()"
-        />
+        <button (click)="logout()">Logout</button>
       }
       @case ('unauthenticated') {
-        <p-button
-          label="Login"
-          (click)="login()"
-        />
+        <button (click)="login()">Login</button>
       }
       @case ('authorized') {
         artesgo
-        <p-button
-          label="Logout"
-          (click)="logout()"
-        />
-        <p-button
-          label="Dashboard"
-          (click)="goToDashboard()"
-        />
+        <button (click)="logout()">Logout</button>
+        <button (click)="goToDashboard()">Dashboard</button>
       }
     }
   </div>

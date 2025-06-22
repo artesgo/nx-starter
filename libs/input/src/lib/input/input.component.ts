@@ -4,7 +4,7 @@ import { Component, input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'atg-input',
+  selector: 'daisy-input',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './input.component.html',

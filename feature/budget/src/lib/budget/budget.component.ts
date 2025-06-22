@@ -1,18 +1,31 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button } from 'primeng/button';
-import { DatePicker } from 'primeng/datepicker';
+// import { Button } from 'primeng/button';
+// import { DatePicker } from 'primeng/datepicker';
 import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { FloatLabel } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
-import { RadioButton } from 'primeng/radiobutton';
+// import { InputTextModule } from 'primeng/inputtext';
+// import { FloatLabel } from 'primeng/floatlabel';
+// import { ButtonModule } from 'primeng/button';
+// import { RadioButton } from 'primeng/radiobutton';
 import { AccumulatedBudgetItem, BudgetItem, RECURRENCE } from './models';
 import dayjs from 'dayjs';
+import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
+import { NgxBorderBeamComponent } from '@omnedia/ngx-border-beam';
+import { NgxShineBorderComponent } from '@omnedia/ngx-shine-border';
+import { ButtonDirective } from 'ng-daisy-button';
+import { InputComponent } from 'ng-daisy-input';
 
 @Component({
   selector: 'bgt-budget',
-  imports: [CommonModule, DatePicker, FormsModule, InputTextModule, FloatLabel, ButtonModule, RadioButton, Button],
+  imports: [
+    InputComponent,
+    ButtonDirective,
+    CommonModule,
+    FormsModule,
+    NgxFlickeringGridComponent,
+    NgxBorderBeamComponent,
+    NgxShineBorderComponent,
+  ],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss',
 })
@@ -185,15 +198,12 @@ export class BudgetComponent {
   barStyle(height: number) {
     return {
       height: `${(height / this.tallest()) * this.targetHeight()}px`,
-      display: 'inline-block',
-      width: '20px',
-      background: this.getRandomHexColor(),
     };
   }
 
   generateEmpties(month = 0) {
     return (
-      new Array(60)
+      new Array(180)
         // return new Array(dayjs().daysInMonth())
         .fill({
           id: '-1',

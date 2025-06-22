@@ -1,92 +1,89 @@
 <div class="flex gap-2 items-center">
   <div class="flex flex-col gap-2">
-    <p-floatlabel [variant]="'on'">
-      <input
-        id="budget"
-        pInputText
-        [(ngModel)]="description"
-      />
-      <label for="budget">Budget Item</label>
-    </p-floatlabel>
-    <p-floatlabel [variant]="'on'">
-      <input
-        id="budget"
-        pInputText
-        [(ngModel)]="amount"
-      />
-      <label for="budget">Amount</label>
-    </p-floatlabel>
-    <p-floatlabel [variant]="'on'">
-      <p-datepicker
-        id="date"
-        [(ngModel)]="date"
-      />
-      <label for="date">Date</label>
-    </p-floatlabel>
+    <daisy-input
+      id="budget"
+      [(ngModel)]="description"
+      size="sm"
+    >
+      Budget Item
+    </daisy-input>
+    <daisy-input
+      id="budget"
+      [(ngModel)]="amount"
+      size="sm"
+    >
+      Amount
+    </daisy-input>
+    <datepicker
+      id="date"
+      [(ngModel)]="date"
+    />
+    <label for="date">Date</label>
   </div>
 
   <div class="flex flex-col gap-1">
     <div class="flex gap-2">
-      <p-radiobutton
+      <input
         [(ngModel)]="recurring"
         value="none"
         name="recurrence"
-        label=""
-        inputId="none"
-      ></p-radiobutton>
+        type="radio"
+        id="none"
+      />
       <label for="none">None</label>
     </div>
 
     <div class="flex gap-2">
-      <p-radiobutton
+      <input
         [(ngModel)]="recurring"
         value="weekly"
         name="recurrence"
-        label=""
+        type="radio"
         inputId="weekly"
-      ></p-radiobutton>
+      />
       <label for="weekly">Weekly</label>
     </div>
 
     <div class="flex gap-2">
-      <p-radiobutton
+      <input
         [(ngModel)]="recurring"
         value="bi-weekly"
         name="recurrence"
-        label=""
+        type="radio"
         inputId="bi-weekly"
-      ></p-radiobutton>
+      />
       <label for="bi-weekly">Bi-Weekly</label>
     </div>
 
     <div class="flex gap-2">
-      <p-radiobutton
+      <input
         [(ngModel)]="recurring"
         value="monthly"
         name="recurrence"
-        label=""
+        type="radio"
         inputId="monthly"
-      ></p-radiobutton>
+      />
       <label for="monthly">Monthly</label>
     </div>
 
     <div class="flex gap-2">
-      <p-radiobutton
+      <input
         [(ngModel)]="recurring"
         value="yearly"
         name="recurrence"
-        label=""
+        type="radio"
         inputId="yearly"
-      ></p-radiobutton>
+      />
       <label for="yearly">Yearly</label>
     </div>
   </div>
 
-  <p-button
-    label="Budget"
-    [size]="'small'"
-    (onClick)="addItem()"
-  ></p-button>
+  <button
+    [atgButton]="'primary'"
+    (click)="addItem()"
+  >
+    Budget
+  </button>
 </div>
 
 <!-- bar chart with month view -->
@@ -137,18 +134,20 @@
 </div> -->
 
 <!-- grouped bar chart with month view -->
-<div class="barchart">
-  @for (dateTotal of groupTotals(); track $index) {
-    <div
-      class="bar"
-      title="{{ dateTotal.total }} - {{ dateTotal.date | date: 'MMMM dd, yyyy' }}"
-      [style]="barStyle(dateTotal.total)"
-    >
-      <div class="bar-text">
-        @if (dateTotal.total > 0) {
-          {{ dateTotal.total }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
-        }
-      </div>
-    </div>
-  }
-</div>
+<om-flickering-grid [squareSize]="6">
+  <div class="barchart">
+    @for (dateTotal of groupTotals(); track $index) {
+      <om-shine-border
+        class="bar"
+        title="{{ dateTotal.total }} - {{ dateTotal.date | date: 'MMMM dd, yyyy' }}"
+        [style]="barStyle(dateTotal.total)"
+      >
+        <div class="bar-text">
+          @if (dateTotal.total > 0) {
+            {{ dateTotal.total }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
+          }
+        </div>
+      </om-shine-border>
+    }
+  </div>
+</om-flickering-grid>
