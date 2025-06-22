@@ -1,60 +1,154 @@
-<p-floatlabel [variant]="'on'">
-  <input
-    id="budget"
-    pInputText
-    [(ngModel)]="description"
-  />
-  <label for="budget">Budget Item</label>
-</p-floatlabel>
-<p-floatlabel [variant]="'on'">
-  <input
-    id="budget"
-    pInputText
-    [(ngModel)]="amount"
-  />
-  <label for="budget">Amount</label>
-</p-floatlabel>
-<p-floatlabel [variant]="'on'">
-  <p-datepicker
-    id="date"
-    [(ngModel)]="date"
-  />
-  <label for="date">Date</label>
-</p-floatlabel>
+<div class="flex gap-2 items-center">
+  <div class="flex flex-col gap-2">
+    <p-floatlabel [variant]="'on'">
+      <input
+        id="budget"
+        pInputText
+        [(ngModel)]="description"
+      />
+      <label for="budget">Budget Item</label>
+    </p-floatlabel>
+    <p-floatlabel [variant]="'on'">
+      <input
+        id="budget"
+        pInputText
+        [(ngModel)]="amount"
+      />
+      <label for="budget">Amount</label>
+    </p-floatlabel>
+    <p-floatlabel [variant]="'on'">
+      <p-datepicker
+        id="date"
+        [(ngModel)]="date"
+      />
+      <label for="date">Date</label>
+    </p-floatlabel>
+  </div>
 
-<p-floatlabel>
-  <label for="recurring">Recurring</label>
-  <p-checkbox
-    id="recurring"
-    [(ngModel)]="recurring"
-    [binary]="true"
-  ></p-checkbox>
-</p-floatlabel>
-<p-button
-  label="Budget"
-  [size]="'small'"
-  (onClick)="addItem()"
-></p-button>
-
-<!-- bar chart with month view -->
-<div class="chart">
-  @for (item of processedItems(); track $index) {
-    <div>
-      item: {{ item.description }} {{ item.amount }} {{ item.total }} <button (click)="removeItem(item.id)">X</button>
+  <div class="flex flex-col gap-1">
+    <div class="flex gap-2">
+      <p-radiobutton
+        [(ngModel)]="recurring"
+        value="none"
+        name="recurrence"
+        label=""
+        inputId="none"
+      ></p-radiobutton>
+      <label for="none">None</label>
     </div>
-  }
+
+    <div class="flex gap-2">
+      <p-radiobutton
+        [(ngModel)]="recurring"
+        value="weekly"
+        name="recurrence"
+        label=""
+        inputId="weekly"
+      ></p-radiobutton>
+      <label for="weekly">Weekly</label>
+    </div>
+
+    <div class="flex gap-2">
+      <p-radiobutton
+        [(ngModel)]="recurring"
+        value="bi-weekly"
+        name="recurrence"
+        label=""
+        inputId="bi-weekly"
+      ></p-radiobutton>
+      <label for="bi-weekly">Bi-Weekly</label>
+    </div>
+
+    <div class="flex gap-2">
+      <p-radiobutton
+        [(ngModel)]="recurring"
+        value="monthly"
+        name="recurrence"
+        label=""
+        inputId="monthly"
+      ></p-radiobutton>
+      <label for="monthly">Monthly</label>
+    </div>
+
+    <div class="flex gap-2">
+      <p-radiobutton
+        [(ngModel)]="recurring"
+        value="yearly"
+        name="recurrence"
+        label=""
+        inputId="yearly"
+      ></p-radiobutton>
+      <label for="yearly">Yearly</label>
+    </div>
+  </div>
+
+  <p-button
+    label="Budget"
+    [size]="'small'"
+    (onClick)="addItem()"
+  ></p-button>
 </div>
 
+<!-- bar chart with month view -->
+<table class="chart">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Total</th>
+      <th>Action</th>
+      <th>Recurr</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of processedItems(); track $index) {
+      @if (item.description !== 'Label') {
+        <tr>
+          <td>{{ item.date | date: 'MMMM dd, yyyy' }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.amount }}</td>
+          <td>{{ item.total }}</td>
+          <td><button (click)="removeItem(item.id)">X</button></td>
+          <td>
+            @if (item.recurring !== RECURRENCE.NONE) {
+              <button (click)="recurr(item)">Recurr</button>
+            }
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+
 <!-- grouped bar chart with month view -->
-<div class="barchart">
+<!-- <div class="barchart">
   @for (group of groupedItems(); track $index) {
     <div class="flex flex-col">
-      @for (item of group; track item.total) {
+      @for (item of group; track item) {
         <div
           title="{{ item.description }}"
           [style]="barStyle(item.amount)"
         ></div>
       }
+    </div>
+  }
+</div> -->
+
+<!-- grouped bar chart with month view -->
+<div class="barchart">
+  @for (dateTotal of groupTotals(); track $index) {
+    <div
+      class="bar"
+      title="{{ dateTotal.total }} - {{ dateTotal.date | date: 'MMMM dd, yyyy' }}"
+      [style]="barStyle(dateTotal.total)"
+    >
+      <div class="bar-text">
+        @if (dateTotal.total > 0) {
+          {{ dateTotal.total }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
+        }
+      </div>
     </div>
   }
 </div>

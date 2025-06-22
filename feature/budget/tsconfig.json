@@ -6,8 +6,6 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
