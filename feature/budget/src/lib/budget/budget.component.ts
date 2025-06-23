@@ -10,22 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { AccumulatedBudgetItem, BudgetItem, RECURRENCE } from './models';
 import dayjs from 'dayjs';
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
-import { NgxBorderBeamComponent } from '@omnedia/ngx-border-beam';
-import { NgxShineBorderComponent } from '@omnedia/ngx-shine-border';
 import { ButtonDirective } from 'ng-daisy-button';
 import { InputComponent } from 'ng-daisy-input';
+import { RadioComponent } from 'ng-daisy-radio';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'bgt-budget',
-  imports: [
-    InputComponent,
-    ButtonDirective,
-    CommonModule,
-    FormsModule,
-    NgxFlickeringGridComponent,
-    NgxBorderBeamComponent,
-    NgxShineBorderComponent,
-  ],
+  imports: [InputComponent, ButtonDirective, CommonModule, FormsModule, NgxFlickeringGridComponent, RadioComponent],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss',
 })
@@ -40,46 +32,46 @@ export class BudgetComponent {
 
   budgetItems = signal<BudgetItem[]>([
     {
-      id: '1234',
+      id: v4(),
       description: 'Starting',
       date: +dayjs('2025-06-09').toDate(),
       recurring: RECURRENCE.NONE,
-      amount: 5459.91,
+      amount: 5555.91,
     },
     {
-      id: '1235',
+      id: v4(),
       description: 'Credit Card',
       date: +dayjs('2025-06-11').toDate(),
       recurring: RECURRENCE.NONE,
       amount: -1000,
     },
     {
-      id: '1236',
+      id: v4(),
       description: 'Salary',
       date: +dayjs('2025-06-12').toDate(),
       recurring: RECURRENCE.BIWEEKLY,
-      amount: 3033.84,
+      amount: 2021.84,
     },
     {
-      id: '1237',
+      id: v4(),
       description: 'Mortgage',
       date: +dayjs('2025-06-15').toDate(),
       recurring: RECURRENCE.MONTHLY,
-      amount: -4100,
+      amount: -2500,
     },
     {
-      id: '1238',
+      id: v4(),
       description: 'ATM',
       date: +dayjs('2025-06-16').toDate(),
       recurring: RECURRENCE.NONE,
       amount: -100,
     },
     {
-      id: '1236',
+      id: v4(),
       description: 'Salary',
       date: +dayjs('2025-06-26').toDate(),
       recurring: RECURRENCE.BIWEEKLY,
-      amount: 3033.84,
+      amount: 2021.84,
     },
   ]);
 
@@ -87,7 +79,8 @@ export class BudgetComponent {
 
   processedItems = computed<AccumulatedBudgetItem[]>(() => {
     const empties = this.emptyItems();
-    const sorted = [...this.budgetItems(), ...empties].sort((a, b) => a.date - b.date);
+    const items = this.budgetItems();
+    const sorted = [...items, ...empties].sort((a, b) => a.date - b.date);
     let total = 0;
     return sorted.map((item) => {
       total += item.amount;
@@ -99,7 +92,7 @@ export class BudgetComponent {
   });
 
   /**
-   * Group items by day, with the chang
+   * Group items by day
    */
   groupedItems = computed<AccumulatedBudgetItem[][]>(() => {
     const items = this.processedItems();
@@ -117,6 +110,9 @@ export class BudgetComponent {
     return groups;
   });
 
+  /**
+   * totals for the bar chart
+   */
   groupTotals = computed(() => {
     const totals = this.groupedItems().map((group) => {
       return group.reduce((total, item) => {
@@ -144,11 +140,16 @@ export class BudgetComponent {
     return tallest;
   });
 
+  /**
+   * Adds a new item to the budget.
+   * The item is created with the current values of date, amount, recurring, and description.
+   * The id of the item is a random string.
+   */
   addItem() {
     this.budgetItems.update((items) => [
       ...items,
       {
-        id: Math.random().toString(),
+        id: v4(),
         date: +this.date(),
         amount: +this.amount(),
         recurring: this.recurring(),
@@ -162,10 +163,15 @@ export class BudgetComponent {
   }
 
   recurr(item: BudgetItem) {
-    this.budgetItems.update((items) => [
-      ...items,
+    // TODO: add month to the date, not just add 30 days
+    // const month = dayjs(item.date).month();
+    this.budgetItems.set([
+      ...this.budgetItems(),
       {
-        ...item,
+        id: v4(),
+        amount: item.amount,
+        description: item.description,
+        recurring: item.recurring,
         date: +dayjs(item.date).add(this.getRecurrence(item), 'day').toDate(),
       },
     ]);
@@ -206,7 +212,7 @@ export class BudgetComponent {
       new Array(180)
         // return new Array(dayjs().daysInMonth())
         .fill({
-          id: '-1',
+          id: v4(),
           description: 'Label',
           date: +dayjs().startOf('day').toDate(),
           amount: 0,

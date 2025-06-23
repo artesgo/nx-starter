@@ -17,7 +17,7 @@ module.exports = [
         'error',
         {
           type: 'attribute',
-          prefix: 'atg',
+          prefix: 'daisy',
           style: 'camelCase',
         },
       ],
@@ -25,7 +25,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'atg',
+          prefix: 'daisy',
           style: 'kebab-case',
         },
       ],

@@ -1,3 +1,15 @@
+.chart {
+  max-height: 300px;
+  display: block;
+  overflow: scroll;
+}
+
+.flickering-grid {
+  width: 720px;
+  display: flex;
+  margin: 0 auto;
+}
+
 .barchart {
   display: flex;
   flex-direction: row;

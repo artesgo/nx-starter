@@ -21,62 +21,53 @@
     <label for="date">Date</label>
   </div>
 
-  <div class="flex flex-col gap-1">
+  <form class="flex flex-col gap-1">
     <div class="flex gap-2">
-      <input
-        [(ngModel)]="recurring"
+      <daisy-radio
         value="none"
         name="recurrence"
-        type="radio"
         id="none"
-      />
-      <label for="none">None</label>
+        >None
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
-      <input
-        [(ngModel)]="recurring"
+      <daisy-radio
         value="weekly"
         name="recurrence"
-        type="radio"
-        inputId="weekly"
-      />
-      <label for="weekly">Weekly</label>
+        id="weekly"
+        >Weekly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
-      <input
-        [(ngModel)]="recurring"
+      <daisy-radio
         value="bi-weekly"
         name="recurrence"
-        type="radio"
-        inputId="bi-weekly"
-      />
-      <label for="bi-weekly">Bi-Weekly</label>
+        id="biweekly"
+        >Bi-Weekly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
-      <input
-        [(ngModel)]="recurring"
+      <daisy-radio
         value="monthly"
         name="recurrence"
-        type="radio"
-        inputId="monthly"
-      />
-      <label for="monthly">Monthly</label>
+        id="monthly"
+        >Monthly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
-      <input
-        [(ngModel)]="recurring"
+      <daisy-radio
         value="yearly"
         name="recurrence"
-        type="radio"
-        inputId="yearly"
-      />
-      <label for="yearly">Yearly</label>
+        id="yearly"
+        >Yearly
+      </daisy-radio>
     </div>
-  </div>
+  </form>
+  {{ recurring() }}
 
   <button
     [atgButton]="'primary'"
@@ -87,7 +78,7 @@
 </div>
 
 <!-- bar chart with month view -->
-<table class="chart">
+<table class="chart mb-20 border border-primary hover:border-accent">
   <thead>
     <tr>
       <th>Date</th>
@@ -105,8 +96,8 @@
         <tr>
           <td>{{ item.date | date: 'MMMM dd, yyyy' }}</td>
           <td>{{ item.description }}</td>
-          <td>{{ item.amount }}</td>
-          <td>{{ item.total }}</td>
+          <td class="text-right">{{ item.amount | currency: 'USD' }}</td>
+          <td class="text-right">{{ item.total | currency: 'USD' }}</td>
           <td><button (click)="removeItem(item.id)">X</button></td>
           <td>
             @if (item.recurring !== RECURRENCE.NONE) {
@@ -134,20 +125,24 @@
 </div> -->
 
 <!-- grouped bar chart with month view -->
-<om-flickering-grid [squareSize]="6">
+<om-flickering-grid
+  [squareSize]="5"
+  [color]="'#FC0'"
+  class="flickering-grid"
+>
   <div class="barchart">
     @for (dateTotal of groupTotals(); track $index) {
-      <om-shine-border
-        class="bar"
+      <div
+        class="bar border border-dashed border-primary hover:bg-accent"
         title="{{ dateTotal.total }} - {{ dateTotal.date | date: 'MMMM dd, yyyy' }}"
         [style]="barStyle(dateTotal.total)"
       >
         <div class="bar-text">
           @if (dateTotal.total > 0) {
-            {{ dateTotal.total }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
+            {{ dateTotal.total | currency: 'USD' }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
           }
         </div>
-      </om-shine-border>
+      </div>
     }
   </div>
 </om-flickering-grid>
