@@ -29,51 +29,9 @@ export class BudgetComponent {
   targetHeight = signal(200);
   RECURRENCE = RECURRENCE;
   scale = signal(500);
-
-  budgetItems = signal<BudgetItem[]>([
-    {
-      id: v4(),
-      description: 'Starting',
-      date: +dayjs('2025-06-09').toDate(),
-      recurring: RECURRENCE.NONE,
-      amount: 5555.91,
-    },
-    {
-      id: v4(),
-      description: 'Credit Card',
-      date: +dayjs('2025-06-11').toDate(),
-      recurring: RECURRENCE.NONE,
-      amount: -1000,
-    },
-    {
-      id: v4(),
-      description: 'Salary',
-      date: +dayjs('2025-06-12').toDate(),
-      recurring: RECURRENCE.BIWEEKLY,
-      amount: 2021.84,
-    },
-    {
-      id: v4(),
-      description: 'Mortgage',
-      date: +dayjs('2025-06-15').toDate(),
-      recurring: RECURRENCE.MONTHLY,
-      amount: -2500,
-    },
-    {
-      id: v4(),
-      description: 'ATM',
-      date: +dayjs('2025-06-16').toDate(),
-      recurring: RECURRENCE.NONE,
-      amount: -100,
-    },
-    {
-      id: v4(),
-      description: 'Salary',
-      date: +dayjs('2025-06-26').toDate(),
-      recurring: RECURRENCE.BIWEEKLY,
-      amount: 2021.84,
-    },
-  ]);
+  budgetItems = signal<BudgetItem[]>(
+    localStorage.getItem('budget') ? (JSON.parse(localStorage.getItem('budget') as string) as BudgetItem[]) : [],
+  );
 
   emptyItems = signal<BudgetItem[]>(this.generateEmpties());
 
@@ -146,35 +104,37 @@ export class BudgetComponent {
    * The id of the item is a random string.
    */
   addItem() {
-    this.budgetItems.update((items) => [
-      ...items,
-      {
-        id: v4(),
-        date: +this.date(),
-        amount: +this.amount(),
-        recurring: this.recurring(),
-        description: this.description(),
-      },
-    ]);
+    const budgetItem = {
+      id: v4(),
+      date: +this.date(),
+      amount: +this.amount(),
+      recurring: this.recurring(),
+      description: this.description(),
+    };
+    this.add(budgetItem);
   }
 
   removeItem(id: string) {
     this.budgetItems.set([...this.budgetItems().filter((i) => i.id !== id)]);
+    localStorage.setItem('budget', JSON.stringify(this.budgetItems()));
   }
 
   recurr(item: BudgetItem) {
     // TODO: add month to the date, not just add 30 days
     // const month = dayjs(item.date).month();
-    this.budgetItems.set([
-      ...this.budgetItems(),
-      {
-        id: v4(),
-        amount: item.amount,
-        description: item.description,
-        recurring: item.recurring,
-        date: +dayjs(item.date).add(this.getRecurrence(item), 'day').toDate(),
-      },
-    ]);
+    const budgetItem = {
+      id: v4(),
+      amount: item.amount,
+      description: item.description,
+      recurring: item.recurring,
+      date: +dayjs(item.date).add(this.getRecurrence(item), 'day').toDate(),
+    };
+    this.add(budgetItem);
+  }
+
+  private add(item: BudgetItem) {
+    this.budgetItems.set([...this.budgetItems(), item]);
+    localStorage.setItem('budget', JSON.stringify(this.budgetItems()));
   }
 
   getRecurrence(item: BudgetItem) {
