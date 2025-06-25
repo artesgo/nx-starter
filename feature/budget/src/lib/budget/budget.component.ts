@@ -41,7 +41,45 @@ export class BudgetComponent {
   RECURRENCE = RECURRENCE;
   scale = signal(500);
   budgetItems = signal<BudgetItem[]>(
-    localStorage.getItem('budget') ? (JSON.parse(localStorage.getItem('budget') as string) as BudgetItem[]) : [],
+    localStorage.getItem('budget')
+      ? (JSON.parse(localStorage.getItem('budget') as string) as BudgetItem[])
+      : [
+          {
+            id: v4(),
+            date: +dayjs(),
+            amount: 500,
+            recurring: RECURRENCE.NONE,
+            description: 'Starting Balance',
+          },
+          {
+            id: v4(),
+            date: +dayjs(),
+            amount: -120,
+            recurring: RECURRENCE.MONTHLY,
+            description: 'Phone Billz',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(1, 'day'),
+            amount: 2,
+            recurring: RECURRENCE.NONE,
+            description: 'Carney Refund',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -1000,
+            recurring: RECURRENCE.NONE,
+            description: 'Credit Card',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(3, 'day'),
+            amount: 1500,
+            recurring: RECURRENCE.BIWEEKLY,
+            description: 'Salary',
+          },
+        ],
   );
 
   emptyItems = signal<BudgetItem[]>(this.generateEmpties());
