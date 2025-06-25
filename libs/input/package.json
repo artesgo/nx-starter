@@ -1,9 +1,9 @@
 {
-  "name": "ng-daisy-input",
+  "name": "@nx-starter/input",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": "^20.0.4",
+    "@angular/core": "^20.0.4"
   },
   "sideEffects": false
 }

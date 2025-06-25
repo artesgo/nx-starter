@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, ElementRef, input, model, output, viewChildren } from '@angular/core';
-import { StyleDirective } from 'ng-daisy-directives';
-import { OverlayComponent } from 'ng-daisy-overlay';
+import { StyleDirective } from '@nx-starter/directives';
+import { OverlayComponent } from '@nx-starter/overlay';
 
 @Component({
   selector: 'atg-dropdown',

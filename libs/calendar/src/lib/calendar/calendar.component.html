@@ -1,66 +1,115 @@
-<!-- <p-floatlabel [variant]="'on'">
-  <input
-    id="task"
-    pInputText
-    [(ngModel)]="task"
-  />
-  <label for="task">Task</label>
-</p-floatlabel>
-
-<p-floatlabel [variant]="'on'">
-  <p-datepicker
-    id="start"
-    [(ngModel)]="start"
-  />
-  <label for="start">Start</label>
-</p-floatlabel>
-
-<p-floatlabel [variant]="'on'">
-  <p-datepicker
-    id="end"
-    [(ngModel)]="end"
-  />
-  <label for="end">end</label>
-</p-floatlabel>
-
-<p-button
-  label="Submit"
-  (click)="submit()"
-  [id]="'calendar-submit'"
-></p-button>
-
-<p-virtualscroller
-  [items]="tasks()"
-  [itemSize]="10"
-  scrollHeight="300px"
-  styleClass="border border-surface"
-  [style]="{ width: '200px', height: '200px' }"
->
-  <ng-template
-    pTemplate="task"
-    let-task
-    let-options="options"
-  >
-    <div
-      class="flex flex-col justify-between p-2"
-      [ngClass]="{ 'bg-slate-800': options.odd }"
-      style="height: 90px"
-    >
-      <div class="flex justify-between">
-        {{ task.title }}
-        <p-checkbox
-          [(ngModel)]="task.done"
-          [binary]="true"
-        ></p-checkbox>
+<div class="container">
+  <button class="sr-only">skip to scheduler</button>
+  <div>
+    <div class="grid controls gap-2 calendar-controls">
+      <div class="flex flex-col flex-grow items-center">
+        <label for="year"> Year </label>
+        <select
+          id="year"
+          class="select select-primary select-xs w-full"
+          [formControl]="yearCtrl"
+        >
+          @for (y of years(); track $index) {
+            <option [value]="y">{{ y }}</option>
+          }
+        </select>
       </div>
-      <div class="flex justify-between">
-        <div>Start</div>
-        <div>{{ task.start | date: 'MMM d, yyyy' }}</div>
+
+      <div class="flex flex-col flex-grow items-center">
+        <label for="month"> Month </label
+        ><select
+          id="month"
+          class="select select-primary select-xs w-full"
+          [formControl]="monthCtrl"
+        >
+          @for (m of months; track $index) {
+            <option [value]="$index + 1">{{ m }}</option>
+          }
+        </select>
       </div>
-      <div class="flex justify-between">
-        <div>End</div>
-        <div>{{ task.due | date: 'MMM d, yyyy' }}</div>
+
+      <div class="flex flex-col flex-grow items-center">
+        <label for="day"> Day </label
+        ><select
+          id="day"
+          class="select select-primary select-xs w-full"
+          [formControl]="dayCtrl"
+        >
+          @for (d of days(); track $index) {
+            @if (d > -1) {
+              <option [value]="d">{{ d }}</option>
+            }
+          }
+        </select>
       </div>
     </div>
-  </ng-template>
-</p-virtualscroller> -->
+
+    @if (time()) {
+      <div class="grid controls gap-2 time-controls">
+        <div class="flex flex-col flex-grow items-center">
+          <label for="hour">Hour</label>
+          <input
+            id="hour"
+            class="input input-primary input-xs w-full"
+            type="text"
+            [formControl]="hourCtrl"
+          />
+        </div>
+
+        <div class="flex flex-col flex-grow items-center">
+          <label for="minute">Minute</label>
+          <input
+            class="input input-primary input-xs w-full"
+            type="text"
+            [formControl]="minuteCtrl"
+          />
+        </div>
+
+        <div class="flex flex-col flex-grow items-center">
+          <label for="second">Second</label>
+          <input
+            class="input input-primary input-xs w-full"
+            type="text"
+            [formControl]="secondCtrl"
+          />
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="calendar">
+    @if (startSunday()) {
+      @for (w of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; track $index) {
+        <div class="day">{{ w }}</div>
+      }
+    } @else {
+      @for (w of ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']; track $index) {
+        <div class="day">{{ w }}</div>
+      }
+    }
+    @for (d of days(); track $index) {
+      @if (d === -1) {
+        <div class="day"></div>
+      } @else {
+        <button
+          class="day btn btn-primary btn-xs"
+          [class.bg-accent]="d === $.day()"
+          [class.text-accent-content]="d === $.day()"
+          (click)="dayCtrl.setValue(d)"
+        >
+          {{ d }}
+        </button>
+      }
+    }
+  </div>
+
+  @if (debug()) {
+    <label for="output">Output</label>
+    <input
+      id="output"
+      class="input input-primary input-xs"
+      type="month"
+      [value]="date()"
+    />
+  }
+</div>

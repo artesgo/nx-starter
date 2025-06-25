@@ -22,6 +22,8 @@
     [class.radio-primary]="style() === 'primary'"
     [class.radio-secondary]="style() === 'secondary'"
     [value]="value()"
+    [checked]="checked()"
+    [formControl]="formControl()!"
   />
   <ng-content></ng-content>
 </label>

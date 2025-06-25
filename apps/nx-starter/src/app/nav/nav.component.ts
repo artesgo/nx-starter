@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { ThemeComponent } from 'ng-daisy';
+import { ThemeComponent } from '@nx-starter/theme';
 import { RouterLink } from '@angular/router';
 
 @Component({

@@ -2,10 +2,26 @@
   "name": "calendar",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/calendar/src",
-  "prefix": "daisy",
+  "prefix": "atg",
   "projectType": "library",
   "tags": [],
   "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/calendar/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/calendar/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/calendar/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

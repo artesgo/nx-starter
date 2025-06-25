@@ -1,3 +1,9 @@
-<atg-dropdown [id]="'theme'" [size]="'xs'" [options]="themes()" (select)="theme.theme.set($event)" [align]="'end'">
+<atg-dropdown
+  [id]="'theme'"
+  [size]="'xs'"
+  [options]="themes()"
+  (select)="theme.set($event)"
+  [align]="'end'"
+>
   Change Theme
 </atg-dropdown>

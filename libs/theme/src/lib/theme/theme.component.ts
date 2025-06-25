@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { DropdownComponent } from 'ng-daisy-dropdown';
-import { ThemeService } from './theme.service';
+import { ChangeDetectionStrategy, Component, effect, input, model, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DropdownComponent } from '@nx-starter/dropdown';
 
 @Component({
-  selector: 'atg-theme',
-  standalone: true,
-  imports: [CommonModule, DropdownComponent],
+  selector: 'daisy-theme',
+  imports: [FormsModule, DropdownComponent],
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeComponent {
-  theme = inject(ThemeService);
+export class ThemeComponent implements OnInit {
   themes = input([
     'light',
     'dark',
@@ -45,5 +43,22 @@ export class ThemeComponent {
     'dim',
     'nord',
     'sunset',
+    'cyberpunk',
+    'valentine',
   ]);
+
+  theme = model('light');
+
+  themeChanged = effect(() => {
+    document.getElementById('app')?.setAttribute('data-theme', this.theme());
+
+    localStorage.setItem('theme', this.theme());
+  });
+
+  ngOnInit(): void {
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      this.theme.set(theme);
+    }
+  }
 }

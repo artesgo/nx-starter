@@ -1,5 +1,5 @@
 {
-  "name": "@nx-starter/indicator",
+  "name": "@nx-starter/calendar",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^20.0.4",

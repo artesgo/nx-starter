@@ -6,7 +6,7 @@
     "nx": "nx",
     "start": "nx serve nx-starter --proxy-config=proxy.config.json",
     "nest": "nx serve backend",
-    "build": "nx build",
+    "build": "nx build nx-starter --configuration=production",
     "test": "nx test",
     "lint": "nx lint",
     "e2e": "nx e2e",

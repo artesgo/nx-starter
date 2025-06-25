@@ -14,65 +14,65 @@
     >
       Amount
     </daisy-input>
-    <datepicker
-      id="date"
-      [(ngModel)]="date"
-    />
-    <label for="date">Date</label>
+    <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
   </div>
 
-  <form class="flex flex-col gap-1">
+  <div class="flex flex-col gap-1">
     <div class="flex gap-2">
       <daisy-radio
+        type="radio"
         value="none"
         name="recurrence"
+        [formControl]="recurrence"
         id="none"
         size="sm"
-        >None
-      </daisy-radio>
+      />None
     </div>
 
     <div class="flex gap-2">
       <daisy-radio
+        type="radio"
         value="weekly"
         name="recurrence"
+        [formControl]="recurrence"
         id="weekly"
         size="sm"
-        >Weekly
-      </daisy-radio>
+      />Weekly
     </div>
 
     <div class="flex gap-2">
       <daisy-radio
+        type="radio"
         value="bi-weekly"
         name="recurrence"
+        [formControl]="recurrence"
         id="biweekly"
         size="sm"
-        >Bi-Weekly
-      </daisy-radio>
+      />Bi-Weekly
     </div>
 
     <div class="flex gap-2">
       <daisy-radio
+        type="radio"
         value="monthly"
         name="recurrence"
+        [formControl]="recurrence"
         id="monthly"
         size="sm"
-        >Monthly
-      </daisy-radio>
+      />Monthly
     </div>
 
     <div class="flex gap-2">
       <daisy-radio
+        type="radio"
         value="yearly"
         name="recurrence"
+        [formControl]="recurrence"
         id="yearly"
         size="sm"
-        >Yearly
-      </daisy-radio>
+      />Yearly
     </div>
-  </form>
-  {{ recurring() }}
+  </div>
 
   <button
     [atgButton]="'primary'"

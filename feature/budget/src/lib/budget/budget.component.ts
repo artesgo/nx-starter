@@ -2,7 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { Button } from 'primeng/button';
 // import { DatePicker } from 'primeng/datepicker';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { InputTextModule } from 'primeng/inputtext';
 // import { FloatLabel } from 'primeng/floatlabel';
 // import { ButtonModule } from 'primeng/button';
@@ -10,21 +10,32 @@ import { FormsModule } from '@angular/forms';
 import { AccumulatedBudgetItem, BudgetItem, RECURRENCE } from './models';
 import dayjs from 'dayjs';
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
-import { ButtonDirective } from 'ng-daisy-button';
-import { InputComponent } from 'ng-daisy-input';
-import { RadioComponent } from 'ng-daisy-radio';
+import { ButtonDirective } from '@nx-starter/button';
+import { InputComponent } from '@nx-starter/input';
+import { RadioComponent } from '@nx-starter/radio';
 import { v4 } from 'uuid';
+import { CalendarChange, CalendarComponent } from '@nx-starter/calendar';
 
 @Component({
   selector: 'bgt-budget',
-  imports: [InputComponent, ButtonDirective, CommonModule, FormsModule, NgxFlickeringGridComponent, RadioComponent],
+  imports: [
+    InputComponent,
+    ReactiveFormsModule,
+    ButtonDirective,
+    CommonModule,
+    FormsModule,
+    NgxFlickeringGridComponent,
+    RadioComponent,
+    CalendarComponent,
+  ],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss',
+  standalone: true,
 })
 export class BudgetComponent {
   amount = signal(0);
   description = signal('');
-  recurring = signal<RECURRENCE>(RECURRENCE.NONE);
+  recurrence = new FormControl(RECURRENCE.NONE);
   date = signal(dayjs());
   targetHeight = signal(200);
   RECURRENCE = RECURRENCE;
@@ -108,7 +119,7 @@ export class BudgetComponent {
       id: v4(),
       date: +this.date(),
       amount: +this.amount(),
-      recurring: this.recurring(),
+      recurring: this.recurrence.value as RECURRENCE,
       description: this.description(),
     };
     this.add(budgetItem);
@@ -127,7 +138,10 @@ export class BudgetComponent {
       amount: item.amount,
       description: item.description,
       recurring: item.recurring,
-      date: +dayjs(item.date).add(this.getRecurrence(item), 'day').toDate(),
+      date: +dayjs(item.date)
+        .add(this.getDays(item.recurring), 'day')
+        .add(this.getMonths(item.recurring), 'month')
+        .toDate(),
     };
     this.add(budgetItem);
   }
@@ -137,18 +151,25 @@ export class BudgetComponent {
     localStorage.setItem('budget', JSON.stringify(this.budgetItems()));
   }
 
-  getRecurrence(item: BudgetItem) {
-    switch (item.recurring) {
+  getDays(recurring: RECURRENCE) {
+    switch (recurring) {
       case RECURRENCE.WEEKLY:
         return 7;
       case RECURRENCE.BIWEEKLY:
         return 14;
-      case RECURRENCE.MONTHLY:
-        return 30;
-      case RECURRENCE.YEARLY:
-        return 365;
       default:
+        return 0;
+    }
+  }
+
+  getMonths(recurring: RECURRENCE) {
+    switch (recurring) {
+      case RECURRENCE.MONTHLY:
         return 1;
+      case RECURRENCE.YEARLY:
+        return 12;
+      default:
+        return 0;
     }
   }
 
@@ -179,5 +200,10 @@ export class BudgetComponent {
         })
         .map((item, i) => ({ ...item, date: +dayjs().startOf('month').add(month, 'month').add(i, 'day').toDate() }))
     );
+  }
+
+  onDateChange(change: CalendarChange) {
+    const date = new Date(+change.year, +change.month - 1, +change.day);
+    this.date.set(dayjs(date));
   }
 }

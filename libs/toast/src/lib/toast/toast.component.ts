@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { DaisyStyles, StyleDirective } from 'ng-daisy-directives';
+import { DaisyStyles, StyleDirective } from '@nx-starter/directives';
 
 @Component({
   selector: 'atg-toast',

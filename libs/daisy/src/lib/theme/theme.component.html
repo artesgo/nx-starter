@@ -1,8 +1,0 @@
-<select
-  class="select select-primary select-xs select-bordered"
-  [(ngModel)]="theme"
->
-  @for (_theme of themes(); track _theme) {
-    <option [value]="_theme">{{ _theme }}</option>
-  }
-</select>

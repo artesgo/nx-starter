@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostBinding, input } from '@angular/core';
-import { StyleDirective } from 'ng-daisy-directives';
+import { StyleDirective } from '@nx-starter/directives';
 
 @Component({
   selector: 'atg-accordion',
