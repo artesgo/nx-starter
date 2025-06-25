@@ -87,7 +87,6 @@ export class BudgetComponent implements OnInit {
   processedItems = computed<AccumulatedBudgetItem[]>(() => {
     const empties = this.emptyItems();
     const items = this.budgetItems();
-    // TODO: calculate totals from before empties and set it into the first empty
     const sorted = [...items, ...empties].sort((a, b) => a.date - b.date);
     let total = 0;
     return sorted.map((item) => {
@@ -255,21 +254,22 @@ export class BudgetComponent implements OnInit {
   }
 
   generateEmpties(month = 0) {
-    return (
-      new Array(180)
-        // return new Array(dayjs().daysInMonth())
-        .fill({
-          id: v4(),
-          description: 'Label',
-          date: +dayjs().startOf('day').toDate(),
-          amount: 0,
-        })
-        .map((item, i) => ({ ...item, date: +dayjs().startOf('month').add(month, 'month').add(i, 'day').toDate() }))
-    );
+    return new Array(180)
+      .fill({
+        id: v4(),
+        description: 'Label',
+        date: +dayjs().startOf('day').toDate(),
+        amount: 0,
+      })
+      .map((item, i) => ({ ...item, date: +dayjs().startOf('month').add(month, 'month').add(i, 'day').toDate() }));
   }
 
   onDateChange(change: CalendarChange) {
     const date = new Date(+change.year, +change.month - 1, +change.day);
     this.date.set(dayjs(date));
+  }
+
+  goToKofi() {
+    window.open('https://ko-fi.com/artesra', '_blank');
   }
 }
