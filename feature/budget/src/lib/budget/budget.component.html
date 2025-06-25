@@ -1,4 +1,5 @@
-<div class="flex gap-2 items-center">
+<div class="flex flex-row gap-8 justify-center items-center">
+  <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
   <div class="flex flex-col gap-2">
     <daisy-input
       id="budget"
@@ -14,7 +15,6 @@
     >
       Amount
     </daisy-input>
-    <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
   </div>
 
   <div class="flex flex-col gap-1">
@@ -83,7 +83,7 @@
 </div>
 
 <!-- bar chart with month view -->
-<table class="chart mb-20 border border-primary hover:border-accent">
+<table class="chart border border-primary hover:border-accent">
   <thead>
     <tr>
       <th>Date</th>
