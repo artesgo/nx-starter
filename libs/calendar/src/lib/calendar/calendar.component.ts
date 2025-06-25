@@ -32,7 +32,7 @@ export type CalendarChange = {
 export class CalendarComponent implements ControlValueAccessor {
   year = input(dayjs().year());
   month = input(dayjs().month() + 1);
-  day = input(dayjs().date() + 5);
+  day = input(dayjs().date());
   hour = input(dayjs().hour());
   minute = input(dayjs().minute());
   second = input(dayjs().second());

@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { Button } from 'primeng/button';
 // import { DatePicker } from 'primeng/datepicker';
@@ -32,7 +32,7 @@ import { CalendarChange, CalendarComponent } from '@nx-starter/calendar';
   styleUrl: './budget.component.scss',
   standalone: true,
 })
-export class BudgetComponent {
+export class BudgetComponent implements OnInit {
   amount = signal(0);
   description = signal('');
   recurrence = new FormControl(RECURRENCE.NONE);
@@ -87,6 +87,7 @@ export class BudgetComponent {
   processedItems = computed<AccumulatedBudgetItem[]>(() => {
     const empties = this.emptyItems();
     const items = this.budgetItems();
+    // TODO: calculate totals from before empties and set it into the first empty
     const sorted = [...items, ...empties].sort((a, b) => a.date - b.date);
     let total = 0;
     return sorted.map((item) => {
@@ -146,6 +147,33 @@ export class BudgetComponent {
     });
     return tallest;
   });
+
+  ngOnInit(): void {
+    this.consolidatePastBalanceIntoTodaysBalance();
+  }
+
+  consolidatePastBalanceIntoTodaysBalance() {
+    let balance = 0;
+    const futureDatedItems = this.budgetItems().filter((item) => {
+      if (dayjs(item.date).isBefore(dayjs())) {
+        balance += item.amount;
+        return false;
+      } else {
+        return true;
+      }
+    });
+
+    this.budgetItems.set([
+      {
+        id: v4(),
+        date: +dayjs(),
+        amount: balance,
+        recurring: RECURRENCE.NONE,
+        description: 'Todays Balance',
+      },
+      ...futureDatedItems,
+    ]);
+  }
 
   /**
    * Adds a new item to the budget.

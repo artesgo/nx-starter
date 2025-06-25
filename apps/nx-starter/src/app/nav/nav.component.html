@@ -1,26 +1,9 @@
-<nav class="pt-2 flex justify-between">
+<nav class="px-4 pt-4 flex justify-between">
   <div>
-    <button [routerLink]="''">Home</button>
-    <button [routerLink]="'calendar'">Calendar</button>
-    <button [routerLink]="'budget'">Budget</button>
-
-    <daisy-theme [(theme)]="theme"></daisy-theme>
+    <button [routerLink]="'budget'">Budgey</button>
   </div>
 
   <div>
-    @switch (authState()) {
-      @case ('authenticated') {
-        artesgo
-        <button (click)="logout()">Logout</button>
-      }
-      @case ('unauthenticated') {
-        <button (click)="login()">Login</button>
-      }
-      @case ('authorized') {
-        artesgo
-        <button (click)="logout()">Logout</button>
-        <button (click)="goToDashboard()">Dashboard</button>
-      }
-    }
+    <daisy-theme [(theme)]="theme"></daisy-theme>
   </div>
 </nav>
