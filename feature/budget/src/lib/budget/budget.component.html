@@ -26,7 +26,8 @@
         [formControl]="recurrence"
         id="none"
         size="sm"
-      />None
+        >None
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
@@ -37,7 +38,8 @@
         [formControl]="recurrence"
         id="weekly"
         size="sm"
-      />Weekly
+        >Weekly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
@@ -48,7 +50,8 @@
         [formControl]="recurrence"
         id="biweekly"
         size="sm"
-      />Bi-Weekly
+        >Bi-Weekly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
@@ -59,7 +62,8 @@
         [formControl]="recurrence"
         id="monthly"
         size="sm"
-      />Monthly
+        >Monthly
+      </daisy-radio>
     </div>
 
     <div class="flex gap-2">
@@ -70,7 +74,8 @@
         [formControl]="recurrence"
         id="yearly"
         size="sm"
-      />Yearly
+        >Yearly
+      </daisy-radio>
     </div>
   </div>
 
@@ -114,6 +119,7 @@
           <td class="px-4 text-right">{{ item.total | currency: 'USD' }}</td>
           <td class="px-4 text-center fill-primary hover:fill-accent">
             <button (click)="removeItem(item.id)">
+              <span class="sr-only">Remove</span>
               <svg
                 width="24"
                 height="24"
@@ -130,6 +136,7 @@
           <td class="px-4 text-center fill-primary hover:fill-accent">
             @if (item.hideRecurring !== true && item.recurring !== RECURRENCE.NONE) {
               <button (click)="recurr(item)">
+                <span class="sr-only">Recurr</span>
                 <svg
                   width="24"
                   height="24"
