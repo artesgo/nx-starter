@@ -9,6 +9,9 @@
 
 .flickering-grid {
   width: 720px;
+  @media screen and (max-width: 720px) {
+    width: 540px;
+  }
   display: flex;
   margin: 0 auto;
 }
@@ -21,6 +24,9 @@
 
 .bar {
   width: 4px;
+  @media screen and (max-width: 720px) {
+    width: 3px;
+  }
   display: inline-block;
   position: relative;
 

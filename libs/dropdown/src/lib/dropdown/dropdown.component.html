@@ -1,4 +1,8 @@
-<div class="dropdown" [class.dropdown-open]="open()" [class.dropdown-end]="align() === 'end'">
+<div
+  class="dropdown"
+  [class.dropdown-open]="open()"
+  [class.dropdown-end]="align() === 'end'"
+>
   <atg-overlay (close)="open.set(false); debugMe('overlay')"></atg-overlay>
   <button
     type="button"
@@ -19,7 +23,7 @@
   <ul
     [class.glass]="glass()"
     [atgStyle]="style()"
-    class="menu z-20 rounded-md border-s dropdown-content flex flex-row bg-{{ style() }}-content text-{{
+    class="menu z-20 rounded-md border-s dropdown-content flex flex-row bg-neutral text-{{
       style()
     }}-content max-h-56 overflow-scroll"
     tabindex="-1"
@@ -43,4 +47,10 @@
     }
   </ul>
 </div>
-<a tabindex="-1" #anchor class="sr-only"> Dropdown Closed </a>
+<a
+  tabindex="-1"
+  #anchor
+  class="sr-only"
+>
+  Dropdown Closed
+</a>

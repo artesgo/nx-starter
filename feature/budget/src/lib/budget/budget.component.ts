@@ -206,6 +206,7 @@ export class BudgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.consolidatePastBalanceIntoTodaysBalance();
+    // TODO: Automatically budget out all recurring items for 180 days
   }
 
   /**
