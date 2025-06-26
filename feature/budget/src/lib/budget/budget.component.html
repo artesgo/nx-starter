@@ -179,7 +179,7 @@
         title="{{ dateTotal.total }} - {{ dateTotal.date | date: 'MMMM dd, yyyy' }}"
         [style]="barStyle(dateTotal.total)"
       >
-        <div class="bar-text">
+        <div class="bar-text bg-primary-content">
           @if (dateTotal.total > 0) {
             {{ dateTotal.total | currency: 'USD' }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
           }
