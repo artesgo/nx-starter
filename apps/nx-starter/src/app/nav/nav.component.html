@@ -1,6 +1,23 @@
 <nav class="px-4 pt-4 flex justify-between">
-  <div>
-    <button [routerLink]="'budget'">Budgey</button>
+  <div class="flex gap-4">
+    <button
+      class="btn btn-primary hover:btn-accent btn-xs"
+      [routerLink]="'budget'"
+    >
+      Immediate Future
+    </button>
+    <button
+      class="btn btn-primary hover:btn-accent btn-xs"
+      [routerLink]="'how-to'"
+    >
+      How To
+    </button>
+    <button
+      class="btn btn-primary hover:btn-accent btn-xs"
+      [routerLink]="'tips'"
+    >
+      Budgetting Tips
+    </button>
   </div>
 
   <div>

@@ -6,7 +6,7 @@
       [(ngModel)]="description"
       size="sm"
     >
-      Budget Item
+      Description
     </daisy-input>
     <daisy-input
       id="budget"
@@ -105,7 +105,7 @@
   </thead>
 
   <tbody>
-    @for (item of processedItems(); track $index) {
+    @for (item of tableFormatItems(); track $index) {
       @if (item.description !== 'Label') {
         <tr>
           <td class="px-4">{{ item.date | date: 'MMM dd, yyyy' }}</td>
@@ -129,7 +129,7 @@
             </button>
           </td>
           <td class="px-4 text-center stroke-primary">
-            @if (item.recurring !== RECURRENCE.NONE) {
+            @if (item.hideRecurring !== true && item.recurring !== RECURRENCE.NONE) {
               <button (click)="recurr(item)">
                 <svg
                   width="24"
@@ -184,6 +184,15 @@
             {{ dateTotal.total | currency: 'USD' }} - {{ dateTotal.date | date: 'MMM dd, yyyy' }}
           }
         </div>
+        @for (subitem of groupedItems()[$index]; track subitem) {
+          <div
+            class="bar bg-secondary hover:bg-primary"
+            [class.bg-secondary]="subitem.amount > 0"
+            [class.bg-accent]="subitem.amount < 0"
+            title="{{ subitem.description }}"
+            [style]="barStyle(subitem.amount)"
+          ></div>
+        }
       </div>
     }
   </div>

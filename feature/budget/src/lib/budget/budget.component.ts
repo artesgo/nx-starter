@@ -33,8 +33,8 @@ import { CalendarChange, CalendarComponent } from '@nx-starter/calendar';
   standalone: true,
 })
 export class BudgetComponent implements OnInit {
-  amount = signal(0);
-  description = signal('');
+  amount = signal(1000);
+  description = signal('E.g. Salary');
   recurrence = new FormControl(RECURRENCE.NONE);
   date = signal(dayjs());
   targetHeight = signal(200);
@@ -49,28 +49,70 @@ export class BudgetComponent implements OnInit {
             date: +dayjs(),
             amount: 500,
             recurring: RECURRENCE.NONE,
-            description: 'Starting Balance',
+            description: 'Todays Balance, past amounts are consolidated into a total for today',
           },
           {
             id: v4(),
             date: +dayjs(),
             amount: -120,
             recurring: RECURRENCE.MONTHLY,
-            description: 'Phone Billz',
+            description: 'Budget negative amounts for bills',
           },
           {
             id: v4(),
             date: +dayjs().add(1, 'day'),
-            amount: 2,
+            amount: 1500,
             recurring: RECURRENCE.NONE,
-            description: 'Carney Refund',
+            description: 'Budget positive amounts for income',
           },
           {
             id: v4(),
             date: +dayjs().add(2, 'day'),
             amount: -1000,
             recurring: RECURRENCE.NONE,
-            description: 'Credit Card',
+            description: 'Credit card payment',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: "Don't",
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: 'track',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: 'every',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: 'little',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: 'expense',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(2, 'day'),
+            amount: -10,
+            recurring: RECURRENCE.NONE,
+            description: 'but you could',
           },
           {
             id: v4(),
@@ -84,25 +126,36 @@ export class BudgetComponent implements OnInit {
 
   emptyItems = signal<BudgetItem[]>(this.generateEmpties());
 
-  processedItems = computed<AccumulatedBudgetItem[]>(() => {
+  tableFormatItems = computed<AccumulatedBudgetItem[]>(() => {
     const empties = this.emptyItems();
     const items = this.budgetItems();
+    // only show recurrence for the last item of a category
     const sorted = [...items, ...empties].sort((a, b) => a.date - b.date);
     let total = 0;
-    return sorted.map((item) => {
+
+    const formatted = sorted.map((item) => {
       total += item.amount;
       return {
         total,
         ...item,
       } as AccumulatedBudgetItem;
     });
+    const categories: string[] = [];
+    formatted.reverse().map((item) => {
+      if (item.recurring !== RECURRENCE.NONE && categories.indexOf(item.description) === -1) {
+        categories.push(item.description);
+      } else {
+        item.hideRecurring = true;
+      }
+    });
+    return formatted.reverse();
   });
 
   /**
    * Group items by day
    */
   groupedItems = computed<AccumulatedBudgetItem[][]>(() => {
-    const items = this.processedItems();
+    const items = this.tableFormatItems();
 
     const groups: AccumulatedBudgetItem[][] = [];
     let currentGroup: AccumulatedBudgetItem[] = [];
@@ -122,7 +175,7 @@ export class BudgetComponent implements OnInit {
    */
   groupTotals = computed(() => {
     const totals = this.groupedItems().map((group) => {
-      return group.reduce((total, item) => {
+      return group.reduce((total, item, index) => {
         let most = 0;
         if (item.total > most) {
           most = item.total;
@@ -131,12 +184,16 @@ export class BudgetComponent implements OnInit {
           ...total,
           date: item.date,
           total: most,
+          sma: most / index,
         };
       });
     });
     return totals;
   });
 
+  /**
+   * The tallest bar in the chart, used for scaling all bars to 200px
+   */
   tallest = computed(() => {
     let tallest = 0;
     this.groupTotals().forEach((group) => {
@@ -151,6 +208,10 @@ export class BudgetComponent implements OnInit {
     this.consolidatePastBalanceIntoTodaysBalance();
   }
 
+  /**
+   * Consolidates all past balance into todays balance
+   * This is to keep the chart width consistent
+   */
   consolidatePastBalanceIntoTodaysBalance() {
     let balance = 0;
     const futureDatedItems = this.budgetItems().filter((item) => {
@@ -248,8 +309,11 @@ export class BudgetComponent implements OnInit {
   }
 
   barStyle(height: number) {
+    const _height = `${(Math.abs(height) / this.tallest()) * this.targetHeight()}px`;
     return {
-      height: `${(height / this.tallest()) * this.targetHeight()}px`,
+      height: _height,
+      position: height < 0 ? 'absolute' : 'relative',
+      top: height < 0 ? `-${_height}` : 'auto',
     };
   }
 

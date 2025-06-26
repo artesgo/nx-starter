@@ -4,10 +4,12 @@ export interface BudgetItem {
   date: number;
   amount: number;
   recurring: RECURRENCE;
+  hideRecurring?: boolean;
 }
 
 export interface AccumulatedBudgetItem extends BudgetItem {
   total: number;
+  sma: number;
 }
 
 export enum RECURRENCE {

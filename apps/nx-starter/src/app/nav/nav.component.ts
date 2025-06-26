@@ -10,21 +10,4 @@ import { RouterLink } from '@angular/router';
 })
 export class NavComponent {
   theme = signal('cupcake');
-  authState = signal('unauthenticated');
-
-  login() {
-    this.authState.set('authenticated');
-  }
-
-  logout() {
-    this.authState.set('unauthenticated');
-  }
-
-  auth() {
-    this.authState.set('authorized');
-  }
-
-  goToDashboard() {
-    console.log('go to dashboard');
-  }
 }
