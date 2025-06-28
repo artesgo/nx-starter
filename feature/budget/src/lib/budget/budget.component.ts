@@ -33,6 +33,8 @@ import { CalendarChange, CalendarComponent } from '@nx-starter/calendar';
   standalone: true,
 })
 export class BudgetComponent implements OnInit {
+  year = signal(dayjs().year());
+
   amount = signal(1000);
   description = signal('E.g. Salary');
   recurrence = new FormControl(RECURRENCE.NONE);

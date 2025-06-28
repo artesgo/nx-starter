@@ -1,3 +1,4 @@
+<h2 class="text-xl mb-2 text-center">Budget</h2>
 <div class="flex flex-row gap-6 justify-center items-center">
   <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
   <div class="flex flex-col gap-2">
@@ -103,8 +104,9 @@
   </div>
 </div>
 
+<h2 class="text-xl mb-2 text-center">Tabular</h2>
 <div class="border border-primary hover:border-accent table-wrapper">
-  <table class="w-full">
+  <table class="w-full text-sm text-nowrap">
     <thead class="top-0 bg-primary text-primary-content">
       <tr>
         <th class="px-4 w-1/2">Date</th>
@@ -165,6 +167,7 @@
   </table>
 </div>
 
+<h2 class="text-xl mb-2 text-center">Cityscape</h2>
 <om-flickering-grid
   [squareSize]="5"
   [color]="'#FC0'"
@@ -198,3 +201,13 @@
     }
   </div>
 </om-flickering-grid>
+
+<div class="text-xs mt-4">&copy; by Artesgo {{ year() }}, all rights reserved</div>
+<div class="text-xs">
+  Icons by mono company
+  <a
+    class="link link-primary"
+    href="https://icons.mono.company/"
+    >mono.company</a
+  >
+</div>
