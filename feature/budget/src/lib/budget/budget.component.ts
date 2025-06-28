@@ -140,15 +140,9 @@ export class BudgetComponent implements OnInit {
         ...item,
       } as AccumulatedBudgetItem;
     });
-    const categories: string[] = [];
-    formatted.reverse().map((item) => {
-      if (item.recurring !== RECURRENCE.NONE && categories.indexOf(item.description) === -1) {
-        categories.push(item.description);
-      } else {
-        item.hideRecurring = true;
-      }
-    });
-    return formatted.reverse();
+
+    const hideOtherRecurring = this.hideRecurring(formatted) as AccumulatedBudgetItem[];
+    return hideOtherRecurring.reverse();
   });
 
   /**
@@ -166,14 +160,13 @@ export class BudgetComponent implements OnInit {
       }
       currentGroup.push(item);
     });
-
     return groups;
   });
 
   /**
    * totals for the bar chart
    */
-  groupTotals = computed(() => {
+  barchartItems = computed(() => {
     const totals = this.groupedItems().map((group) => {
       return group.reduce((total, item, index) => {
         let most = 0;
@@ -196,7 +189,7 @@ export class BudgetComponent implements OnInit {
    */
   tallest = computed(() => {
     let tallest = 0;
-    this.groupTotals().forEach((group) => {
+    this.barchartItems().forEach((group) => {
       if (group.total > tallest) {
         tallest = group.total;
       }
@@ -206,7 +199,6 @@ export class BudgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.consolidatePastBalanceIntoTodaysBalance();
-    // TODO: Automatically budget out all recurring items for 180 days
   }
 
   /**
@@ -236,6 +228,38 @@ export class BudgetComponent implements OnInit {
     ]);
   }
 
+  autoRecurr() {
+    const items = this.budgetItems();
+    const recurringItems = this.hideRecurring([...items]);
+    const autoRecurring = recurringItems.filter((item) => item.hideRecurring === false);
+    autoRecurring.forEach((item) => {
+      let recurringItem = this.getRecurring(item);
+      while (recurringItem.date < +dayjs().add(180, 'day')) {
+        this.add({
+          id: v4(),
+          date: recurringItem.date,
+          amount: recurringItem.amount,
+          recurring: recurringItem.recurring,
+          description: recurringItem.description,
+        });
+        recurringItem = this.getRecurring(recurringItem);
+      }
+    });
+  }
+
+  hideRecurring(items: Array<BudgetItem | AccumulatedBudgetItem>) {
+    const categories: string[] = [];
+    return [...items.reverse()].map((item) => {
+      if (item.recurring !== RECURRENCE.NONE && categories.indexOf(item.description) === -1) {
+        categories.push(item.description);
+        item.hideRecurring = false;
+      } else {
+        item.hideRecurring = true;
+      }
+      return item;
+    });
+  }
+
   /**
    * Adds a new item to the budget.
    * The item is created with the current values of date, amount, recurring, and description.
@@ -258,9 +282,12 @@ export class BudgetComponent implements OnInit {
   }
 
   recurr(item: BudgetItem) {
-    // TODO: add month to the date, not just add 30 days
-    // const month = dayjs(item.date).month();
-    const budgetItem = {
+    const budgetItem = this.getRecurring(item);
+    this.add(budgetItem);
+  }
+
+  getRecurring(item: BudgetItem) {
+    return {
       id: v4(),
       amount: item.amount,
       description: item.description,
@@ -270,7 +297,6 @@ export class BudgetComponent implements OnInit {
         .add(this.getMonths(item.recurring), 'month')
         .toDate(),
     };
-    this.add(budgetItem);
   }
 
   private add(item: BudgetItem) {
@@ -321,12 +347,16 @@ export class BudgetComponent implements OnInit {
   generateEmpties(month = 0) {
     return new Array(180)
       .fill({
-        id: v4(),
+        id: '1',
         description: 'Label',
         date: +dayjs().startOf('day').toDate(),
         amount: 0,
       })
-      .map((item, i) => ({ ...item, date: +dayjs().startOf('month').add(month, 'month').add(i, 'day').toDate() }));
+      .map((item, i) => ({
+        ...item,
+        id: v4(),
+        date: +dayjs().startOf('day').add(month, 'month').add(i, 'day').toDate(),
+      }));
   }
 
   onDateChange(change: CalendarChange) {

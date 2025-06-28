@@ -17,11 +17,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-starter/budget": ["feature/budget/src/index.ts"],
-      "@nx-starter/calendar": ["libs/calendar/src/index.ts"],
       "@nx-starter/accordion": ["libs/accordion/src/index.ts"],
       "@nx-starter/avatar": ["libs/avatar/src/index.ts"],
+      "@nx-starter/budget": ["feature/budget/src/index.ts"],
       "@nx-starter/button": ["libs/button/src/index.ts"],
+      "@nx-starter/calendar": ["libs/calendar/src/index.ts"],
       "@nx-starter/checkbox": ["libs/checkbox/src/index.ts"],
       "@nx-starter/directives": ["libs/directives/src/index.ts"],
       "@nx-starter/divider": ["libs/divider/src/index.ts"],
