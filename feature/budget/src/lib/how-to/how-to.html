@@ -103,7 +103,16 @@
 
 <div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
   <button [atgButton]="'accent'">Recur to 6 months</button>
-  <div>Recur to 6 months will look for recurring items in your budget and project them out 6 months</div>
+  <div>
+    <div>Recur to 6 months will look for recurring items in your budget and project them out 6 months</div>
+    <div>You have to click the recur button every once in a while to update your data</div>
+    <div>It uses the last occurrence of a recurring item to calculate the next one</div>
+    <div>
+      If you get done paying the government CPP taxes, you can add another Salary item with the updated amount instead
+      of using Recur
+    </div>
+    <div>You may also have to delete some of the recurring items that aren't accurate and then run Recur again</div>
+  </div>
 </div>
 
 <div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
@@ -112,6 +121,12 @@
     Buy me a Ko-fi will take you to my Ko-fi page, if you want... it's not like I want you to buy me a coffee or
     anything.
   </div>
+</div>
+
+<h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Why</h2>
+<div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
+  I wanted an app that can somewhat keep track of my finances without too much fiddling. There's still some fiddling,
+  but at least the recurring expense and incomes are handled for you.
 </div>
 
 <div class="text-xs mt-4">&copy; by Artesgo {{ year() }}, all rights reserved</div>
