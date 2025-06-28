@@ -4,10 +4,9 @@
   [class.text-sm]="size() === 'sm'"
   [class.text-md]="size() === 'md'"
   [class.text-lg]="size() === 'lg'"
-  [for]="id()"
 >
   <input
-    [id]="id()"
+    [attr.id]="id()"
     type="radio"
     [name]="name()"
     class="radio mr-2"
