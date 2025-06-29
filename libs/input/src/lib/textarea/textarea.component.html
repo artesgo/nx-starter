@@ -1,0 +1,24 @@
+<label
+  class="block"
+  [for]="id()"
+>
+  <ng-content></ng-content>
+</label>
+<textarea
+  [id]="id()"
+  [attr.data-testid]="id()"
+  class="textarea w-full"
+  [class.textarea-xs]="size() === 'xs'"
+  [class.textarea-sm]="size() === 'sm'"
+  [class.textarea-md]="size() === 'md'"
+  [class.textarea-lg]="size() === 'lg'"
+  [class.textarea-accent]="style() === 'accent'"
+  [class.textarea-ghost]="style() === 'ghost'"
+  [class.textarea-info]="style() === 'info'"
+  [class.textarea-neutral]="style() === 'neutral'"
+  [class.textarea-primary]="style() === 'primary'"
+  [class.textarea-secondary]="style() === 'secondary'"
+  [name]="name()"
+  [(value)]="value"
+  (keyup)="updateValue($event)"
+></textarea>

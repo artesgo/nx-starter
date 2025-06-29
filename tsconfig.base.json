@@ -36,7 +36,8 @@
       "@nx-starter/tabs": ["libs/tabs/src/index.ts"],
       "@nx-starter/theme": ["libs/theme/src/index.ts"],
       "@nx-starter/toast": ["libs/toast/src/index.ts"],
-      "@nx-starter/typeahead": ["libs/typeahead/src/index.ts"]
+      "@nx-starter/typeahead": ["libs/typeahead/src/index.ts"],
+      "@nx-starter/card": ["libs/card/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

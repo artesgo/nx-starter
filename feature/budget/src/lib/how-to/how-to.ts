@@ -1,11 +1,12 @@
-import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonDirective } from '@nx-starter/button';
+import { CalendarComponent } from '@nx-starter/calendar';
 import { InputComponent } from '@nx-starter/input';
 import { RadioComponent } from '@nx-starter/radio';
-import { CalendarComponent } from '@nx-starter/calendar';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import dayjs from 'dayjs';
+import { FlexPair } from '../flex-pair';
 
 @Component({
   selector: 'bgt-how-to',
@@ -17,6 +18,7 @@ import dayjs from 'dayjs';
     InputComponent,
     RadioComponent,
     CalendarComponent,
+    FlexPair,
   ],
   templateUrl: './how-to.html',
   styleUrl: './how-to.scss',

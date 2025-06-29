@@ -1,13 +1,19 @@
 <h1 class="text-2xl md:w-5/6 lg:w-1/2 mx-auto">How to use this app</h1>
 
 <h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Calendar</h2>
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <daisy-calendar></daisy-calendar>
   <div>Use the calendar to select dates, i think</div>
-</div>
+</bgt-flex-pair>
 
-<h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">The Spicy Details</h2>
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-4">
+<h2
+  title
+  class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto"
+>
+  The Spicy Details
+</h2>
+
+<bgt-flex-pair>
   <daisy-input
     id="budget"
     size="sm"
@@ -15,9 +21,9 @@
     Description
   </daisy-input>
   <div>Use the description and amount fields to add a budget item</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <daisy-input
     id="budget"
     size="sm"
@@ -25,12 +31,12 @@
     Amount
   </daisy-input>
   <div>Positive amounts for income, negative amounts for expenses</div>
-</div>
+</bgt-flex-pair>
 
 <h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Recurring Items</h2>
 <div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">Use the radio buttons to select how the item should recurr</div>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-4">
+<bgt-flex-pair>
   <daisy-radio
     type="radio"
     value="none"
@@ -41,9 +47,9 @@
     >None
   </daisy-radio>
   <div>None means one-time income or expense</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-4">
+<bgt-flex-pair>
   <daisy-radio
     type="radio"
     value="weekly"
@@ -54,9 +60,9 @@
     >Weekly
   </daisy-radio>
   <div>Weekly is uhhh... every week</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-4">
+<bgt-flex-pair>
   <daisy-radio
     type="radio"
     value="bi-weekly"
@@ -67,9 +73,9 @@
     >Bi-Weekly
   </daisy-radio>
   <div>Bi-Weekly is every two weeks</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-4">
+<bgt-flex-pair>
   <daisy-radio
     type="radio"
     value="monthly"
@@ -80,9 +86,9 @@
     >Monthly
   </daisy-radio>
   <div>Monthly for once a month items</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <daisy-radio
     type="radio"
     value="yearly"
@@ -93,15 +99,15 @@
     >Yearly
   </daisy-radio>
   <div>Yearly if you've signed up for those yearly discounts</div>
-</div>
+</bgt-flex-pair>
 
 <h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">The Clicky Parts</h2>
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <button [atgButton]="'primary'">Budget</button>
   <div>Budget creates the item based on all of the previous fields</div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <button [atgButton]="'accent'">Recur to 6 months</button>
   <div>
     <div>Recur to 6 months will look for recurring items in your budget and project them out 6 months</div>
@@ -113,15 +119,15 @@
     </div>
     <div>You may also have to delete some of the recurring items that aren't accurate and then run Recur again</div>
   </div>
-</div>
+</bgt-flex-pair>
 
-<div class="flex flex-row gap-6 justify-between items-center md:w-5/6 lg:w-1/2 mx-auto mb-8">
+<bgt-flex-pair>
   <button [atgButton]="'secondary'">Buy me a Ko-fi</button>
   <div>
     Buy me a Ko-fi will take you to my Ko-fi page, if you want... it's not like I want you to buy me a coffee or
     anything.
   </div>
-</div>
+</bgt-flex-pair>
 
 <h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Why...</h2>
 <div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">

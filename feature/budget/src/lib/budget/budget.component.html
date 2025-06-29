@@ -107,7 +107,7 @@
 <h2 class="text-xl mb-2 text-center">Tabular</h2>
 <div class="border border-primary hover:border-accent table-wrapper">
   <table class="w-full text-sm text-nowrap">
-    <thead class="top-0 bg-primary text-primary-content">
+    <thead class="top-0 bg-primary text-primary-content sticky">
       <tr>
         <th class="px-4 w-1/2">Date</th>
         <th class="px-4 w-full">Description</th>
@@ -170,10 +170,11 @@
 <h2 class="text-xl mb-2 text-center">Cityscape</h2>
 <om-flickering-grid
   [squareSize]="5"
-  [color]="'#FC0'"
+  [color]="'#FFCC00'"
+  [maxOpacity]="0.8"
   class="flickering-grid"
 >
-  <div class="barchart">
+  <div class="barchart overflow-hidden">
     @for (bar of barchartItems(); track bar.id) {
       @if ($index > 0) {
         <div
@@ -211,6 +212,6 @@
   <a
     class="link link-primary"
     href="https://icons.mono.company/"
-    >mono.company</a
-  >
+    >mono.company
+  </a>
 </div>

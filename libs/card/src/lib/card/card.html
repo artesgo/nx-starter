@@ -1,0 +1,33 @@
+<div
+  class="card"
+  [class.card-bordered]="bordered()"
+  [class.card-side]="imageSide()"
+  [class.card-full]="imageFull()"
+  [class.card-xs]="size() === 'xs'"
+  [class.card-sm]="size() === 'sm'"
+  [class.card-md]="size() === 'md'"
+  [class.card-lg]="size() === 'lg'"
+  [class.card-xl]="size() === 'xl'"
+  [class.bg-primary]="style() === 'primary'"
+  [class.bg-secondary]="style() === 'secondary'"
+  [class.bg-accent]="style() === 'accent'"
+  [class.bg-ghost]="style() === 'ghost'"
+  [class.bg-neutral]="style() === 'neutral'"
+  [class.bg-info]="style() === 'info'"
+  [class.text-primary-content]="style() === 'primary'"
+  [class.text-secondary-content]="style() === 'secondary'"
+  [class.text-accent-content]="style() === 'accent'"
+  [class.text-ghost-content]="style() === 'ghost'"
+  [class.text-neutral-content]="style() === 'neutral'"
+  [class.text-info-content]="style() === 'info'"
+>
+  <div class="card-body">
+    <div class="card-title">
+      <ng-content select="title"></ng-content>
+    </div>
+    <ng-content></ng-content>
+    <div class="card-actions">
+      <ng-content select="actions"></ng-content>
+    </div>
+  </div>
+</div>

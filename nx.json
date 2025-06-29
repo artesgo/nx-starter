@@ -93,5 +93,10 @@
     "@nx/angular:component": {
       "style": "scss"
     }
+  },
+  "release": {
+    "version": {
+      "preVersionCommand": "npx nx run-many -t build"
+    }
   }
 }

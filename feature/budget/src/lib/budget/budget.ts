@@ -1,6 +1,6 @@
+import { Routes } from '@angular/router';
 import { HowTo } from '../how-to/how-to';
 import { BudgetComponent } from './budget.component';
-import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {

@@ -1,4 +1,7 @@
-<label class="block" [for]="id()">
+<label
+  class="block"
+  [for]="id()"
+>
   <ng-content></ng-content>
 </label>
 <input
@@ -15,6 +18,12 @@
   [class.input-neutral]="style() === 'neutral'"
   [class.input-primary]="style() === 'primary'"
   [class.input-secondary]="style() === 'secondary'"
+  [class.text-accent]="style() === 'accent'"
+  [class.text-ghost]="style() === 'ghost'"
+  [class.text-info]="style() === 'info'"
+  [class.text-neutral]="style() === 'neutral'"
+  [class.text-primary]="style() === 'primary'"
+  [class.text-secondary]="style() === 'secondary'"
   type="text"
   [name]="name()"
   [(value)]="value"
