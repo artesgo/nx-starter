@@ -104,7 +104,17 @@
   </div>
 </div>
 
-<h2 class="text-xl mb-2 text-center">Tabular</h2>
+<div class="flex gap-2 justify-center">
+  <h2 class="text-xl mb-2 text-center">Tabular</h2>
+  <daisy-input
+    id="budget"
+    [(ngModel)]="search"
+    size="sm"
+    [placeholder]="'Search'"
+  >
+    <span class="sr-only">Search</span>
+  </daisy-input>
+</div>
 <div class="border border-primary hover:border-accent table-wrapper">
   <table class="w-full text-sm text-nowrap">
     <thead class="top-0 bg-primary text-primary-content sticky">
@@ -119,7 +129,7 @@
     </thead>
 
     <tbody>
-      @for (item of tableFormatItems(); track item.id) {
+      @for (item of tableSearchItems(); track item.id) {
         @if (item.description !== 'Label') {
           <tr>
             <td class="px-4">{{ item.date | date: 'MMM dd, yyyy' }}</td>

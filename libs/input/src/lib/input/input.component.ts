@@ -25,6 +25,7 @@ export class InputComponent implements ControlValueAccessor {
   name = input<string>('');
   touched = false;
   disabled = false;
+  placeholder = input('');
 
   writeValue(value: string) {
     this.value = value;

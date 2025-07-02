@@ -30,6 +30,7 @@ export class BudgetComponent implements OnInit {
   year = signal(dayjs().year());
 
   amount = signal(1000);
+  search = signal('');
   description = signal('E.g. Salary');
   recurrence = new FormControl(RECURRENCE.NONE);
   date = signal(dayjs());
@@ -125,7 +126,6 @@ export class BudgetComponent implements OnInit {
   tableFormatItems = computed<AccumulatedBudgetItem[]>(() => {
     const empties = this.emptyItems();
     const items = this.budgetItems();
-    // only show recurrence for the last item of a category
     const sorted = [...items, ...empties].sort((a, b) => a.date - b.date);
     let total = 0;
 
@@ -139,6 +139,12 @@ export class BudgetComponent implements OnInit {
 
     const hideOtherRecurring = this.hideRecurring(formatted) as AccumulatedBudgetItem[];
     return hideOtherRecurring.reverse();
+  });
+
+  tableSearchItems = computed(() => {
+    return this.tableFormatItems().filter((item) =>
+      item.description.toLowerCase().includes(this.search().toLowerCase()),
+    );
   });
 
   /**
