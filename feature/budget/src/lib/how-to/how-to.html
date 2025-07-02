@@ -1,5 +1,10 @@
 <h1 class="text-2xl md:w-5/6 lg:w-1/2 mx-auto">How to use this app</h1>
 
+<div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
+  This is an app that projects your budget into the future. There's some fiddling involved, but at least the recurring
+  expense and incomes are mostly handled for you.
+</div>
+
 <h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Calendar</h2>
 <bgt-flex-pair>
   <daisy-calendar></daisy-calendar>
@@ -133,16 +138,29 @@
   </div>
 </bgt-flex-pair>
 
-<h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">Why...</h2>
+<h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">The Table</h2>
 <div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
-  I wanted an app that can somewhat keep track of my finances without too much fiddling. There's still some fiddling,
-  but at least the recurring expense and incomes are handled for you.
+  The table is a list of all of your budget items. You can edit the amount, manually recurr or delete the item.
 </div>
 
 <div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
   The app will automatically consolidate budget items that occur in the past into the current day. This of course can
-  get out of date over time, so just delete it and re-enter the value with today's date as a non-recurring item. This is
-  done to keep the number of bars in the barchart consistent and your data from bloating the browser storage.
+  get out of date over time, but it's a simple update to Todays Balance (usually the first item) in the table.
+</div>
+
+<div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
+  You will also have recurring expenses that you don't know the final total. Credit card debt is one of those things.
+  Just add a recurring estimate and you can come back and update in the table as you go.
+</div>
+
+<div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
+  There's also a search that will filter the table by description so you can edit a specific category quickly.
+</div>
+
+<h2 class="text-xl mb-2 md:w-5/6 lg:w-1/2 mx-auto">The Cityscape</h2>
+<div class="mb-2 md:w-5/6 lg:w-1/2 mx-auto">
+  This is a quick overview of your next 6 months. You can hover over the bars to see the estimated balance based on the
+  budget items you've entered.
 </div>
 
 <div class="text-xs mt-4">&copy; by Artesgo {{ year() }}, all rights reserved</div>

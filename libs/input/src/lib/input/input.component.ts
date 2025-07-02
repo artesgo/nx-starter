@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -21,20 +21,21 @@ export class InputComponent implements ControlValueAccessor {
   style = input<'primary' | 'secondary' | 'accent' | 'ghost' | 'neutral' | 'info'>('primary');
   size = input<'sm' | 'md' | 'lg' | 'xs'>('md');
   id = input.required<string>();
-  value = '';
+  value = model<string | number | null>('');
+  align = input<'left' | 'right'>('left');
   name = input<string>('');
   touched = false;
   disabled = false;
   placeholder = input('');
 
   writeValue(value: string) {
-    this.value = value;
+    this.value.set(value);
     this.onChange(value);
     this.onTouched();
   }
 
   onChange = (value: string) => {
-    this.value = value;
+    this.value.set(value);
   };
 
   registerOnChange(onChange: any) {

@@ -278,6 +278,12 @@ export class BudgetComponent implements OnInit {
     this.add(budgetItem);
   }
 
+  updateItem(id: string, amount: number | string | null) {
+    if (!amount) return;
+    this.budgetItems.set([...this.budgetItems().map((i) => (i.id === id ? { ...i, amount: +amount } : i))]);
+    localStorage.setItem('budget', JSON.stringify(this.budgetItems()));
+  }
+
   removeItem(id: string) {
     this.budgetItems.set([...this.budgetItems().filter((i) => i.id !== id)]);
     localStorage.setItem('budget', JSON.stringify(this.budgetItems()));
