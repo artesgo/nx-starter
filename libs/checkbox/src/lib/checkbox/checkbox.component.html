@@ -1,6 +1,11 @@
-<div class="flex items-center gap-2" [ngClass]="class()" [class.flex-row-reverse]="reverse()">
+<div
+  class="flex items-center gap-2"
+  [ngClass]="class()"
+  [class.flex-row-reverse]="reverse()"
+>
   <input
     type="checkbox"
+    [formControl]="control()"
     class="checkbox"
     [name]="name()"
     [id]="id()"
@@ -15,7 +20,6 @@
     [class.checkbox-neutral]="style() === 'neutral'"
     [class.checkbox-primary]="style() === 'primary'"
     [class.checkbox-secondary]="style() === 'secondary'"
-    [(checked)]="checked"
   />
   <label
     [for]="id()"

@@ -1,25 +1,18 @@
-<ul>
-  @for (
-    menuItem of menu;
-    track menuItem.value;
-    let i = $index, last = $last, first = $first, even = $even, odd = $odd
-  ) {
-    <li [class.even]="even">
-      <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
-    </li>
-  } @empty {
-    <li>No menu items</li>
-  }
-</ul>
+<form [formGroup]="form">
+  <daisy-checkbox
+    [id]="'checkbox'"
+    [control]="check"
+    [(touched)]="reactiveTouched"
+    >Hi
+  </daisy-checkbox>
+  <div>Reactive Form {{ check.value }}</div>
+</form>
 
-<ul>
-  @if (menu.length > 0) {
-    @for (menuItem of menu; track menuItem) {
-      <li>
-        <a [routerLink]="menuItem.value">{{ menuItem.label }}</a>
-      </li>
-    }
-  } @else {
-    <li>No menu items</li>
-  }
-</ul>
+<daisy-checkbox
+  [id]="'checkboxzs'"
+  [(ngModel)]="checked"
+  [(touched)]="modelTouched"
+  >World
+</daisy-checkbox>
+
+<div>Template Form {{ checked() }}</div>

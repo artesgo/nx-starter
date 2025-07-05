@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@nx-starter/checkbox';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [RouterLink],
+  imports: [FormsModule, CheckboxComponent, ReactiveFormsModule, FormsModule],
 })
 export class HomeComponent {
   menu = [
@@ -29,4 +30,12 @@ export class HomeComponent {
       value: 'link-5',
     },
   ];
+
+  check = new FormControl(false);
+  checked = signal(false);
+  form = new FormGroup({
+    check: this.check,
+  });
+  reactiveTouched = signal(false);
+  modelTouched = signal(false);
 }

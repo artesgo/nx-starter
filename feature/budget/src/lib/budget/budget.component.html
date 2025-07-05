@@ -209,13 +209,15 @@
             }
           </div>
           @for (subitem of groupedItems()[$index]; track subitem.id) {
-            <div
-              class="bar bg-secondary hover:bg-primary"
-              [class.bg-secondary]="subitem.amount > 0"
-              [class.bg-accent]="subitem.amount < 0"
-              title="{{ subitem.description }}"
-              [style]="barStyle(subitem.amount)"
-            ></div>
+            @if (subitem.description !== 'Todays Balance') {
+              <div
+                class="bar bg-secondary hover:bg-primary"
+                [class.bg-secondary]="subitem.amount > 0"
+                [class.bg-accent]="subitem.amount < 0"
+                title="{{ subitem.description }}"
+                [style]="barStyle(subitem.amount)"
+              ></div>
+            }
           }
         </div>
       }
