@@ -3,7 +3,6 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonDirective } from '@nx-starter/button';
 import { CalendarChange, CalendarComponent } from '@nx-starter/calendar';
-import { Card } from '@nx-starter/card';
 import { InputComponent } from '@nx-starter/input';
 import { RadioComponent } from '@nx-starter/radio';
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
@@ -22,7 +21,6 @@ import { AccumulatedBudgetItem, BudgetItem, RECURRENCE } from './models';
     NgxFlickeringGridComponent,
     RadioComponent,
     CalendarComponent,
-    Card,
   ],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss',

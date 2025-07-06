@@ -1,112 +1,110 @@
 <h2 class="text-xl mb-2 text-center">Budget</h2>
-<daisy-card [style]="'neutral'">
-  <div class="flex flex-row flex-wrap md:flex-nowrap gap-6 justify-center items-center overflow-hidden">
-    <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
-    <div class="flex flex-col gap-2">
-      <daisy-input
-        id="budget"
-        [(ngModel)]="description"
+<div class="flex flex-row flex-wrap md:flex-nowrap gap-6 justify-center items-center overflow-hidden">
+  <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
+  <div class="flex flex-col gap-2">
+    <daisy-input
+      id="budget"
+      [(ngModel)]="description"
+      size="sm"
+    >
+      Description
+    </daisy-input>
+    <daisy-input
+      id="budget"
+      [(ngModel)]="amount"
+      size="sm"
+    >
+      Amount
+    </daisy-input>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <div class="flex gap-2">
+      <daisy-radio
+        type="radio"
+        value="none"
+        name="recurrence"
+        [formControl]="recurrence"
+        id="none"
         size="sm"
-      >
-        Description
-      </daisy-input>
-      <daisy-input
-        id="budget"
-        [(ngModel)]="amount"
-        size="sm"
-      >
-        Amount
-      </daisy-input>
+        >None
+      </daisy-radio>
     </div>
 
-    <div class="flex flex-col gap-1">
-      <div class="flex gap-2">
-        <daisy-radio
-          type="radio"
-          value="none"
-          name="recurrence"
-          [formControl]="recurrence"
-          id="none"
-          size="sm"
-          >None
-        </daisy-radio>
-      </div>
-
-      <div class="flex gap-2">
-        <daisy-radio
-          type="radio"
-          value="weekly"
-          name="recurrence"
-          [formControl]="recurrence"
-          id="weekly"
-          size="sm"
-          >Weekly
-        </daisy-radio>
-      </div>
-
-      <div class="flex gap-2">
-        <daisy-radio
-          type="radio"
-          value="bi-weekly"
-          name="recurrence"
-          [formControl]="recurrence"
-          id="biweekly"
-          size="sm"
-          >Bi-Weekly
-        </daisy-radio>
-      </div>
-
-      <div class="flex gap-2">
-        <daisy-radio
-          type="radio"
-          value="monthly"
-          name="recurrence"
-          [formControl]="recurrence"
-          id="monthly"
-          size="sm"
-          >Monthly
-        </daisy-radio>
-      </div>
-
-      <div class="flex gap-2">
-        <daisy-radio
-          type="radio"
-          value="yearly"
-          name="recurrence"
-          [formControl]="recurrence"
-          id="yearly"
-          size="sm"
-          >Yearly
-        </daisy-radio>
-      </div>
+    <div class="flex gap-2">
+      <daisy-radio
+        type="radio"
+        value="weekly"
+        name="recurrence"
+        [formControl]="recurrence"
+        id="weekly"
+        size="sm"
+        >Weekly
+      </daisy-radio>
     </div>
 
-    <div class="flex flex-col gap-2 max-md:flex-row">
-      <button
-        [atgButton]="'primary'"
-        (click)="addItem()"
-      >
-        Budget
-      </button>
+    <div class="flex gap-2">
+      <daisy-radio
+        type="radio"
+        value="bi-weekly"
+        name="recurrence"
+        [formControl]="recurrence"
+        id="biweekly"
+        size="sm"
+        >Bi-Weekly
+      </daisy-radio>
+    </div>
 
-      <button
-        [atgButton]="'accent'"
-        (click)="autoRecurr()"
-      >
-        Recur to 6 months
-      </button>
+    <div class="flex gap-2">
+      <daisy-radio
+        type="radio"
+        value="monthly"
+        name="recurrence"
+        [formControl]="recurrence"
+        id="monthly"
+        size="sm"
+        >Monthly
+      </daisy-radio>
+    </div>
 
-      <button
-        [atgButton]="'secondary'"
-        (click)="goToKofi()"
-      >
-        Buy me a Ko-fi
-      </button>
+    <div class="flex gap-2">
+      <daisy-radio
+        type="radio"
+        value="yearly"
+        name="recurrence"
+        [formControl]="recurrence"
+        id="yearly"
+        size="sm"
+        >Yearly
+      </daisy-radio>
     </div>
   </div>
-</daisy-card>
 
-<div class="flex gap-2 justify-center">
+  <div class="flex flex-col gap-2 max-md:flex-row flex-wrap justify-center">
+    <button
+      [atgButton]="'primary'"
+      (click)="addItem()"
+    >
+      Budget
+    </button>
+
+    <button
+      [atgButton]="'accent'"
+      (click)="autoRecurr()"
+    >
+      Recur to 6 months
+    </button>
+
+    <button
+      [atgButton]="'secondary'"
+      (click)="goToKofi()"
+    >
+      Buy me a Ko-fi
+    </button>
+  </div>
+</div>
+
+<div class="flex gap-2 justify-center mt-8">
   <h2 class="text-xl mb-2 text-center">Tabular</h2>
   <daisy-input
     id="budget"
@@ -223,7 +221,7 @@
   </table>
 </div>
 
-<h2 class="text-xl mb-2 text-center">Cityscape</h2>
+<h2 class="text-xl mb-2 text-center mt-8">Cityscape</h2>
 <om-flickering-grid
   [squareSize]="5"
   [color]="'#FFCC00'"
@@ -234,7 +232,7 @@
     @for (bar of barchartItems(); track bar.id) {
       @if ($index > 0) {
         <div
-          class="bar border border-dashed border-primary hover:bg-accent"
+          class="bar border md:border-dashed max-md:border-none max-md:bg-neutral border-primary hover:bg-accent"
           title="{{ bar.total | currency: 'USD' }} - {{ bar.date | date: 'MMMM dd, yyyy' }}"
           [style]="barStyle(bar.total)"
           tabindex="0"

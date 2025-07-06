@@ -1,7 +1,13 @@
+$desktop: 768px;
+$mobile: 600px;
+
 .flickering-grid {
   width: 720px;
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $desktop) {
     width: 540px;
+  }
+  @media screen and (max-width: $mobile) {
+    width: 100%;
   }
   display: flex;
   margin: 0 auto;
@@ -11,12 +17,16 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
 }
 
 .bar {
   width: 4px;
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $desktop) {
     width: 3px;
+  }
+  @media screen and (max-width: $mobile) {
+    width: 2px;
   }
   display: inline-block;
   position: relative;
@@ -32,6 +42,9 @@
   opacity: 0;
   transform-origin: 0 0;
   position: absolute;
+  @media screen and (max-width: $desktop) {
+    transform: rotate(-90deg) translate(5px, -10px);
+  }
   transform: rotate(-25deg) translate(5px, -10px);
   font-size: 0.9rem;
   text-wrap: nowrap;
@@ -47,7 +60,7 @@
   margin: 0 auto;
   overflow-y: auto;
   height: 210px;
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $desktop) {
     height: 420px;
   }
 }
