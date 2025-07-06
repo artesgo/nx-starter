@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, input, model, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormsModule } from '@angular/forms';
 import { DropdownComponent } from '@nx-starter/dropdown';
 
 @Component({
@@ -47,11 +48,17 @@ export class ThemeComponent implements OnInit {
     'valentine',
   ]);
 
-  theme = model('light');
+  themeControl = new FormControl('light');
+  theme = model<string>(this.themeControl.value || 'light');
+
+  constructor() {
+    this.themeControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
+      this.theme.set(value || 'light');
+    });
+  }
 
   themeChanged = effect(() => {
     document.getElementById('app')?.setAttribute('data-theme', this.theme());
-
     localStorage.setItem('theme', this.theme());
   });
 

@@ -31,7 +31,6 @@ export class CheckboxComponent implements ControlValueAccessor {
   // called when using ngModel
   writeValue(value: boolean): void {
     // called programmatically, not from the template
-    console.log('writeValue', value);
     this.control().setValue(value);
   }
 

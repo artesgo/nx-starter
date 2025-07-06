@@ -3,7 +3,7 @@
   [class.dropdown-open]="open()"
   [class.dropdown-end]="align() === 'end'"
 >
-  <atg-overlay (close)="open.set(false); debugMe('overlay')"></atg-overlay>
+  <atg-overlay (close)="open.set(false)"></atg-overlay>
   <button
     type="button"
     role="listbox"
@@ -12,7 +12,7 @@
     [class.btn-md]="size() === 'md'"
     [class.btn-lg]="size() === 'lg'"
     (click)="open.set(true)"
-    (keydown.esc)="anchor.focus(); open.set(false); debugMe('esc')"
+    (keydown.esc)="anchor.focus(); open.set(false)"
     (keydown)="focusFirst($event)"
     class="btn btn-{{ style() }} border-{{
       style()
@@ -23,23 +23,25 @@
   <ul
     [class.glass]="glass()"
     [atgStyle]="style()"
-    class="menu z-20 rounded-md border-s dropdown-content flex flex-row bg-neutral text-{{
+    class="menu z-20 rounded-md border-s dropdown-content flex flex-row text-{{
       style()
     }}-content max-h-56 overflow-scroll"
     tabindex="-1"
-    (keydown.esc)="anchor.focus(); open.set(false); debugMe('esc list')"
+    (keydown.esc)="anchor.focus(); open.set(false)"
   >
     @for (item of values(); track $index) {
       <li class="w-full">
         <button
           #option
-          class="m-1 w-full flex items-center whitespace-nowrap"
+          class="m-1 w-full flex items-center whitespace-nowrap text-{{ style() }}-content hover:bg-{{
+            style()
+          }}-content/50 focus:bg-{{ style() }}-content/50"
           [class.btn-xs]="size() === 'xs'"
           [class.btn-sm]="size() === 'sm'"
           [class.btn-md]="size() === 'md'"
           [class.btn-lg]="size() === 'lg'"
           (keydown)="keydown($event, $index)"
-          (click)="select.emit(item); anchor.focus(); open.set(false); debugMe('click')"
+          (click)="anchor.focus(); open.set(false); control().setValue(item)"
         >
           {{ labels()[$index] }}
         </button>

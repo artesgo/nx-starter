@@ -1,108 +1,110 @@
 <h2 class="text-xl mb-2 text-center">Budget</h2>
-<div class="flex flex-row gap-6 justify-center items-center">
-  <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
-  <div class="flex flex-col gap-2">
-    <daisy-input
-      id="budget"
-      [(ngModel)]="description"
-      size="sm"
-    >
-      Description
-    </daisy-input>
-    <daisy-input
-      id="budget"
-      [(ngModel)]="amount"
-      size="sm"
-    >
-      Amount
-    </daisy-input>
+<daisy-card [style]="'neutral'">
+  <div class="flex flex-row flex-wrap md:flex-nowrap gap-6 justify-center items-center overflow-hidden">
+    <daisy-calendar (dateChange)="onDateChange($event)"></daisy-calendar>
+    <div class="flex flex-col gap-2">
+      <daisy-input
+        id="budget"
+        [(ngModel)]="description"
+        size="sm"
+      >
+        Description
+      </daisy-input>
+      <daisy-input
+        id="budget"
+        [(ngModel)]="amount"
+        size="sm"
+      >
+        Amount
+      </daisy-input>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <div class="flex gap-2">
+        <daisy-radio
+          type="radio"
+          value="none"
+          name="recurrence"
+          [formControl]="recurrence"
+          id="none"
+          size="sm"
+          >None
+        </daisy-radio>
+      </div>
+
+      <div class="flex gap-2">
+        <daisy-radio
+          type="radio"
+          value="weekly"
+          name="recurrence"
+          [formControl]="recurrence"
+          id="weekly"
+          size="sm"
+          >Weekly
+        </daisy-radio>
+      </div>
+
+      <div class="flex gap-2">
+        <daisy-radio
+          type="radio"
+          value="bi-weekly"
+          name="recurrence"
+          [formControl]="recurrence"
+          id="biweekly"
+          size="sm"
+          >Bi-Weekly
+        </daisy-radio>
+      </div>
+
+      <div class="flex gap-2">
+        <daisy-radio
+          type="radio"
+          value="monthly"
+          name="recurrence"
+          [formControl]="recurrence"
+          id="monthly"
+          size="sm"
+          >Monthly
+        </daisy-radio>
+      </div>
+
+      <div class="flex gap-2">
+        <daisy-radio
+          type="radio"
+          value="yearly"
+          name="recurrence"
+          [formControl]="recurrence"
+          id="yearly"
+          size="sm"
+          >Yearly
+        </daisy-radio>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 max-md:flex-row">
+      <button
+        [atgButton]="'primary'"
+        (click)="addItem()"
+      >
+        Budget
+      </button>
+
+      <button
+        [atgButton]="'accent'"
+        (click)="autoRecurr()"
+      >
+        Recur to 6 months
+      </button>
+
+      <button
+        [atgButton]="'secondary'"
+        (click)="goToKofi()"
+      >
+        Buy me a Ko-fi
+      </button>
+    </div>
   </div>
-
-  <div class="flex flex-col gap-1">
-    <div class="flex gap-2">
-      <daisy-radio
-        type="radio"
-        value="none"
-        name="recurrence"
-        [formControl]="recurrence"
-        id="none"
-        size="sm"
-        >None
-      </daisy-radio>
-    </div>
-
-    <div class="flex gap-2">
-      <daisy-radio
-        type="radio"
-        value="weekly"
-        name="recurrence"
-        [formControl]="recurrence"
-        id="weekly"
-        size="sm"
-        >Weekly
-      </daisy-radio>
-    </div>
-
-    <div class="flex gap-2">
-      <daisy-radio
-        type="radio"
-        value="bi-weekly"
-        name="recurrence"
-        [formControl]="recurrence"
-        id="biweekly"
-        size="sm"
-        >Bi-Weekly
-      </daisy-radio>
-    </div>
-
-    <div class="flex gap-2">
-      <daisy-radio
-        type="radio"
-        value="monthly"
-        name="recurrence"
-        [formControl]="recurrence"
-        id="monthly"
-        size="sm"
-        >Monthly
-      </daisy-radio>
-    </div>
-
-    <div class="flex gap-2">
-      <daisy-radio
-        type="radio"
-        value="yearly"
-        name="recurrence"
-        [formControl]="recurrence"
-        id="yearly"
-        size="sm"
-        >Yearly
-      </daisy-radio>
-    </div>
-  </div>
-
-  <div class="flex flex-col gap-2">
-    <button
-      [atgButton]="'primary'"
-      (click)="addItem()"
-    >
-      Budget
-    </button>
-
-    <button
-      [atgButton]="'accent'"
-      (click)="autoRecurr()"
-    >
-      Recur to 6 months
-    </button>
-
-    <button
-      [atgButton]="'secondary'"
-      (click)="goToKofi()"
-    >
-      Buy me a Ko-fi
-    </button>
-  </div>
-</div>
+</daisy-card>
 
 <div class="flex gap-2 justify-center">
   <h2 class="text-xl mb-2 text-center">Tabular</h2>
@@ -119,12 +121,27 @@
   <table class="w-full text-sm text-nowrap">
     <thead class="top-0 bg-primary text-primary-content sticky">
       <tr>
-        <th class="px-4 w-1/4">Date</th>
-        <th class="px-4 w-1/3">Description</th>
-        <th class="px-4 w-1/3">Amount</th>
-        <th class="px-4">Total</th>
-        <th class="px-4">Action</th>
-        <th class="px-4">Recurr</th>
+        <th class="px-4 w-1/4">
+          <div>Date</div>
+          <div class="md:hidden max-md:block">
+            <div>Description</div>
+          </div>
+        </th>
+        <th class="px-4 w-1/3 md:block max-md:hidden">Description</th>
+        <th class="px-4 w-1/3">
+          <div>Amount</div>
+          <div class="md:hidden max-md:block">
+            <div>Total</div>
+          </div>
+        </th>
+        <th class="px-4 md:block max-md:hidden">Total</th>
+        <th class="px-4 w-1/3">
+          <div>Action</div>
+          <div class="md:hidden max-md:block">
+            <div>Recurr</div>
+          </div>
+        </th>
+        <th class="px-4 md:block max-md:hidden">Recurr</th>
       </tr>
     </thead>
 
@@ -132,8 +149,12 @@
       @for (item of tableSearchItems(); track item.id) {
         @if (item.description !== 'Label') {
           <tr>
-            <td class="px-4">{{ item.date | date: 'MMM dd, yyyy' }}</td>
-            <td class="px-4">{{ item.description }}</td>
+            <td class="px-4">
+              <div>{{ item.date | date: 'MMM dd, yyyy' }}</div>
+              <div class="md:hidden max-md:block">{{ item.description }}</div>
+            </td>
+            <td class="px-4 md:block max-md:hidden">{{ item.description }}</td>
+
             <td class="px-4">
               <daisy-input
                 id="amount-{{ item.id }}"
@@ -144,10 +165,15 @@
               >
                 <span class="sr-only">Amount</span>
               </daisy-input>
+              <div class="md:hidden max-md:block text-right">{{ item.total | currency: 'USD' }}</div>
             </td>
-            <td class="px-4 text-right">{{ item.total | currency: 'USD' }}</td>
-            <td class="px-4 text-center fill-primary hover:fill-accent">
-              <button (click)="removeItem(item.id)">
+            <td class="px-4 text-right md:block max-md:hidden">{{ item.total | currency: 'USD' }}</td>
+
+            <td class="px-4 text-center">
+              <button
+                class="fill-primary hover:fill-acent"
+                (click)="removeItem(item.id)"
+              >
                 <span class="sr-only">Remove</span>
                 <svg
                   width="24"
@@ -161,10 +187,20 @@
                   />
                 </svg>
               </button>
+              <div class="md:hidden max-md:block">
+                <ng-container *ngTemplateOutlet="recurrer"></ng-container>
+              </div>
             </td>
-            <td class="px-4 text-center fill-primary hover:fill-accent">
+            <td class="px-4 text-center fill-primary md:block max-md:hidden">
+              <ng-container *ngTemplateOutlet="recurrer"></ng-container>
+            </td>
+
+            <ng-template #recurrer>
               @if (item.hideRecurring !== true && item.recurring !== RECURRENCE.NONE) {
-                <button (click)="recurr(item)">
+                <button
+                  class="fill-primary hover:fill-acent"
+                  (click)="recurr(item)"
+                >
                   <span class="sr-only">Recurr</span>
                   <svg
                     width="24"
@@ -179,7 +215,7 @@
                   </svg>
                 </button>
               }
-            </td>
+            </ng-template>
           </tr>
         }
       }
