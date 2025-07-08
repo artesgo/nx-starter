@@ -3,7 +3,7 @@ $mobile: 600px;
 
 .flickering-grid {
   width: 720px;
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: ($desktop - 1)) {
     width: 540px;
   }
   @media screen and (max-width: $mobile) {
@@ -22,7 +22,7 @@ $mobile: 600px;
 
 .bar {
   width: 4px;
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: ($desktop - 1)) {
     width: 3px;
   }
   @media screen and (max-width: $mobile) {
@@ -42,7 +42,7 @@ $mobile: 600px;
   opacity: 0;
   transform-origin: 0 0;
   position: absolute;
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: ($desktop - 1)) {
     transform: rotate(-90deg) translate(5px, -10px);
   }
   transform: rotate(-25deg) translate(5px, -10px);
@@ -60,7 +60,11 @@ $mobile: 600px;
   margin: 0 auto;
   overflow-y: auto;
   height: 210px;
-  @media screen and (max-width: $desktop) {
+
+  @media screen and (min-width: $desktop) {
+    width: 720px;
+  }
+  @media screen and (max-width: ($desktop - 1)) {
     height: 420px;
   }
 }
