@@ -129,7 +129,7 @@ export class BudgetComponent implements OnInit {
         return {
           ...total,
           date: item.date,
-          total: most,
+          total: item.total,
           sma: most / index,
         };
       });
@@ -294,12 +294,15 @@ export class BudgetComponent implements OnInit {
     return color;
   }
 
-  barStyle(height: number) {
-    const _height = `${(Math.abs(height) / this.tallest()) * this.targetHeight()}px`;
+  barStyle(change: number, inTheHole = false, nested = false) {
+    const _height = `${(Math.abs(change) / this.tallest()) * this.targetHeight()}px`;
+    const top = !inTheHole && nested ? { top: change < 0 ? `-${_height}` : 'auto' } : {};
+    const bottom = { bottom: !nested && change < 0 ? `-${_height}` : '0px' };
     return {
       height: _height,
-      position: height < 0 ? 'absolute' : 'relative',
-      top: height < 0 ? `-${_height}` : 'auto',
+      position: nested && change < 0 ? 'absolute' : 'relative',
+      ...top,
+      ...bottom,
     };
   }
 

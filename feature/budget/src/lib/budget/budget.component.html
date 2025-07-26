@@ -231,16 +231,16 @@
   <div class="barchart">
     @for (bar of barchartItems(); track bar.id) {
       @if ($index > 0) {
+        @let parentStyle = barStyle(bar.total);
         <div
           class="bar border md:border-dashed max-md:border-none max-md:bg-neutral border-primary hover:bg-accent"
           title="{{ bar.total | currency: 'USD' }} - {{ bar.date | date: 'MMMM dd, yyyy' }}"
-          [style]="barStyle(bar.total)"
+          [style]="parentStyle"
+          [class.bg-neutral]="bar.total < 0"
           tabindex="0"
         >
           <div class="bar-text text-primary-content bg-primary">
-            @if (bar.total > 0) {
-              {{ bar.total | currency: 'USD' }} - {{ bar.date | date: 'MMM dd, yyyy' }}
-            }
+            {{ bar.total | currency: 'USD' }} - {{ bar.date | date: 'MMM dd, yyyy' }}
           </div>
           @for (subitem of groupedItems()[$index]; track subitem.id) {
             @if (subitem.description !== 'Todays Balance') {
@@ -249,7 +249,7 @@
                 [class.bg-secondary]="subitem.amount > 0"
                 [class.bg-accent]="subitem.amount < 0"
                 title="{{ subitem.description }}"
-                [style]="barStyle(subitem.amount)"
+                [style]="barStyle(subitem.amount, bar.total < 0, true)"
               ></div>
             }
           }
