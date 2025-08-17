@@ -106,6 +106,7 @@
 
 <div class="flex gap-2 justify-center mt-8">
   <h2 class="text-xl mb-2 text-center">Tabular</h2>
+
   <daisy-input
     id="budget"
     [(ngModel)]="search"
@@ -114,6 +115,20 @@
   >
     <span class="sr-only">Search</span>
   </daisy-input>
+
+  <button
+    [atgButton]="'secondary'"
+    size="sm"
+    (click)="exportFile()"
+  >
+    Export CSV
+  </button>
+
+  <input
+    type="file"
+    class="file-input file-input-primary file-input-sm"
+    (change)="uploadFile($event)"
+  />
 </div>
 <div class="border border-primary hover:border-accent table-wrapper">
   <table class="text-sm text-nowrap">
@@ -147,11 +162,11 @@
       @for (item of tableSearchItems(); track item.id) {
         @if (item.description !== 'Label') {
           <tr>
-            <td class="px-4">
+            <td class="px-4 py-2">
               <div>{{ item.date | date: 'MMM dd, yyyy' }}</div>
               <div class="md:hidden max-md:block">{{ item.description }}</div>
             </td>
-            <td class="px-4 md:block max-md:hidden">{{ item.description }}</td>
+            <td class="px-4 py-2 md:block max-md:hidden">{{ item.description }}</td>
 
             <td class="px-4">
               <daisy-input
@@ -165,9 +180,9 @@
               </daisy-input>
               <div class="md:hidden max-md:block text-right">{{ item.total | currency: 'USD' }}</div>
             </td>
-            <td class="px-4 text-right md:block max-md:hidden">{{ item.total | currency: 'USD' }}</td>
+            <td class="px-4 py-1 text-right md:block max-md:hidden">{{ item.total | currency: 'USD' }}</td>
 
-            <td class="px-4 text-center">
+            <td class="px-4 text-center align-middle">
               <button
                 class="fill-primary hover:fill-acent"
                 (click)="removeItem(item.id)"
@@ -189,7 +204,7 @@
                 <ng-container *ngTemplateOutlet="recurrer"></ng-container>
               </div>
             </td>
-            <td class="px-4 text-center fill-primary md:block max-md:hidden">
+            <td class="px-4 text-center align-middle fill-primary md:block max-md:hidden">
               <ng-container *ngTemplateOutlet="recurrer"></ng-container>
             </td>
 

@@ -7,6 +7,7 @@ import { InputComponent } from '@nx-starter/input';
 import { RadioComponent } from '@nx-starter/radio';
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
 import dayjs from 'dayjs';
+import { csv2json, json2csv } from 'json-2-csv';
 import { v4 } from 'uuid';
 import { AccumulatedBudgetItem, BudgetItem, RECURRENCE } from './models';
 
@@ -154,6 +155,10 @@ export class BudgetComponent implements OnInit {
     this.consolidatePastBalanceIntoTodaysBalance();
   }
 
+  rounded(num: number) {
+    return Math.round(num * 100) / 100;
+  }
+
   /**
    * Consolidates all past balance into todays balance
    * This is to keep the chart width consistent
@@ -163,6 +168,7 @@ export class BudgetComponent implements OnInit {
     const futureDatedItems = this.budgetItems().filter((item) => {
       if (dayjs(item.date).isBefore(dayjs())) {
         balance += item.amount;
+        balance = this.rounded(balance);
         return false;
       } else {
         return true;
@@ -328,5 +334,31 @@ export class BudgetComponent implements OnInit {
 
   goToKofi() {
     window.open('https://ko-fi.com/artesra', '_blank');
+  }
+
+  exportFile() {
+    const csv = json2csv(this.budgetItems());
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'budget.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  uploadFile(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0] as File;
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const csv = e.target?.result as string;
+      const budgetItems = csv2json(csv);
+      this.budgetItems.set(budgetItems as BudgetItem[]);
+      // console.log(budgetItems);
+    };
+    reader.readAsText(file);
   }
 }
