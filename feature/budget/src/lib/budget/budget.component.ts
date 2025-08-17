@@ -66,9 +66,37 @@ export class BudgetComponent implements OnInit {
           {
             id: v4(),
             date: +dayjs().add(7, 'day'),
-            amount: -1500,
+            amount: -700,
             recurring: RECURRENCE.NONE,
             description: 'One off expense',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(9, 'day'),
+            amount: -80,
+            recurring: RECURRENCE.MONTHLY,
+            description: 'Phone Bill',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(14, 'day'),
+            amount: -140,
+            recurring: RECURRENCE.MONTHLY,
+            description: 'Insurance',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(17, 'day'),
+            amount: 1500,
+            recurring: RECURRENCE.BIWEEKLY,
+            description: 'Salary',
+          },
+          {
+            id: v4(),
+            date: +dayjs().add(47, 'day'),
+            amount: 13500,
+            recurring: RECURRENCE.NONE,
+            description: 'Year end bonus',
           },
         ],
   );
@@ -357,7 +385,6 @@ export class BudgetComponent implements OnInit {
       const csv = e.target?.result as string;
       const budgetItems = csv2json(csv);
       this.budgetItems.set(budgetItems as BudgetItem[]);
-      // console.log(budgetItems);
     };
     reader.readAsText(file);
   }
