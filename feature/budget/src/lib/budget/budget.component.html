@@ -104,8 +104,8 @@
   </div>
 </div>
 
-<div class="flex gap-2 justify-center mt-8">
-  <h2 class="text-xl mb-2 text-center">Tabular</h2>
+<div class="flex gap-2 justify-center mt-8 flex-wrap mb-2">
+  <h2 class="text-xl text-center">Tabular</h2>
 
   <daisy-input
     id="budget"
@@ -121,15 +121,23 @@
     size="sm"
     (click)="exportFile()"
   >
-    Export CSV
+    Export
   </button>
 
+  <label
+    for="file"
+    class="btn btn-primary btn-sm"
+  >
+    Import
+  </label>
   <input
     type="file"
-    class="file-input file-input-primary file-input-sm"
+    id="file"
+    class="hidden"
     (change)="uploadFile($event)"
   />
 </div>
+
 <div class="border border-primary hover:border-accent table-wrapper">
   <table class="text-sm text-nowrap">
     <thead class="top-0 bg-primary text-primary-content sticky">

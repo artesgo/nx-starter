@@ -22,6 +22,7 @@
       "@nx-starter/budget": ["feature/budget/src/index.ts"],
       "@nx-starter/button": ["libs/button/src/index.ts"],
       "@nx-starter/calendar": ["libs/calendar/src/index.ts"],
+      "@nx-starter/card": ["libs/card/src/index.ts"],
       "@nx-starter/checkbox": ["libs/checkbox/src/index.ts"],
       "@nx-starter/directives": ["libs/directives/src/index.ts"],
       "@nx-starter/divider": ["libs/divider/src/index.ts"],
@@ -36,8 +37,7 @@
       "@nx-starter/tabs": ["libs/tabs/src/index.ts"],
       "@nx-starter/theme": ["libs/theme/src/index.ts"],
       "@nx-starter/toast": ["libs/toast/src/index.ts"],
-      "@nx-starter/typeahead": ["libs/typeahead/src/index.ts"],
-      "@nx-starter/card": ["libs/card/src/index.ts"]
+      "@nx-starter/typeahead": ["libs/typeahead/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
